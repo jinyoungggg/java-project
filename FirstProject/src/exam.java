@@ -10,7 +10,7 @@ public class exam {
 			for(  int b = 5; b >= 0; b--) {
 				System.out.println("주사위 경우의 수 = "+ a + "+"+ b);
 				
-				
+				//여기서공부
 				
 				
 			}
