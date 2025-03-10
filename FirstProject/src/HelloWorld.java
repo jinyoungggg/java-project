@@ -3,14 +3,14 @@
 
 
 
-
+/*
 
 //	예제	// Student클래스에 평균을 구하는 getTotal()
 		// 국, 영, 수의 점수 합산값을 리턴 받아서 출력
 		
 		// Student 클래스에 평균을 구하는 getAverage()
 		// 총점의 평균을 구한다.}
-		
+	
 import java.util.Scanner;
 
 public class HelloWorld {
@@ -1794,6 +1794,35 @@ public class HelloWorld {
 								}
 			
 							
+							
+							
+	// toString     Student [name=홍길동, ban=5, no=1, kor=80, eng=90, math=95
+	
+							
+ 
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+	// 1번 >>> 1~100 사이의 랜덤값 출력	
+		
+	
+			int a = (int) (Math.random()*100) + 1;
+			                                        //Math.Random() 0.0~0.999999
+													//따라서 X100 하면
+													//0~99
+													//그래서 +1해줘야함!
+														//1~100
+			
+			
+			
+			System.out.println(a);
 						
 						
 											
@@ -1809,3 +1838,4 @@ public class HelloWorld {
 
 
 
+*/
