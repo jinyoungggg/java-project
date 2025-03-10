@@ -1796,7 +1796,11 @@ public class HelloWorld {
 							
 							
 							
-	// toString     Student [name=홍길동, ban=5, no=1, kor=80, eng=90, math=95
+	// toString     소스 toString
+	
+	
+	// 결과값 => Student [name=홍길동, ban=5, no=1, kor=80, eng=90, math=95]
+	 
 	
 							
  
@@ -1812,7 +1816,7 @@ public class HelloWorld {
 							
 	// 1번 >>> 1~100 사이의 랜덤값 출력	
 		
-	
+	import java.util.Scanner;
 			int a = (int) (Math.random()*100) + 1;
 			                                        //Math.Random() 0.0~0.999999
 													//따라서 X100 하면
@@ -1826,16 +1830,241 @@ public class HelloWorld {
 						
 						
 											
-												
-												
-
+//예제 //값이 작다, 크다, 같다
+		// 작을 때 : 더 큰 수를 입력하세요.
+		// 클때: 더 작은수를 입력하세요
+		// 맞췄습니다. 시도 횟수는 몇회입니다.	
 											
 
-								
-			
+		public class exam{
+	
+	public static void main(String[] args) {
 		
-						
+	
+	// 1번 >>> 1~100 사이의 랜덤값 출력	
+		
+	
+			int a = (int) (Math.random()*100);
+			
+			
+			System.out.println(a);
+		
+
+
+      // 1번 >>> 1~100 사이의 랜덤값
+  int answer = (int) (Math.random()* 100)+ 1;
+	//사용자가 입력할 변수
+	int input = 0;
+	// answer를 맞출 때까지 시도한 횟수
+	int count = 0;
+	
+	//사용자가 숫자를 입력한다.
+	Scanner scanner = new Scanner(System.in);
+	
+	
+	
+		System.out.println("테스트용, 정답:"+answer);
+		do {
+			count +=1;
+			//count +=1;// 위치 중요!!
+			System.out.print("1~100사이의 값을 입력하세요: ");
+			int input1 = scanner.nextInt();
+			
+			
+			
+			
+			if(input1< answer)
+				System.out.println("더 큰 수를 입력하세요.");
+			else if(input1 > answer)
+				System.out.println("더 작은 수를 입력하세요.");
+			else if(input1==answer) {
+				System.out.println("맞췄습니다. 시도 횟수는" + count +"회입니다.");
+				break;	
+			}   //만약 count +=1; 의 위치가 여기 있으면 한번에 맞춰도 0회라고 뜸!
+		}while(true); // (  )  <-안의 내용이 맞다면 반복한다
+		
+		
+//		1~100사이의 값을 입력하세요: 2
+//		더 큰 수를 입력하세요.
+//		1~100사이의 값을 입력하세요: 2
+//		더 큰 수를 입력하세요.
+//		1~100사이의 값을 입력하세요: 2
+//		더 큰 수를 입력하세요.
+//		1~100사이의 값을 입력하세요: 76
+//		맞췄습니다. 시도 횟수는4회입니다.
+
+		
+		/*
+		 * while(){  ()<-안의 내용이 맞다면 반복
+		 * 
+		 * 
+		 * 
+		 * 
+		 * }
+		 * 
+		 * do{
+		 * }
+		 * while()  ()<-안의 내용이 맞다면 반복하긴하는데,do 안을 무조건 1번은 실행함
+		 * 
+		 * 
+		 */
 
 
 
-*/
+
+// 다형성: 여러개상속
+
+interface Predator {
+	String getFood ();//(인터페이스는 구현하는게아니고 선언부만)
+	// 디폴트 메서드
+	default void printFood() {
+		// %d, %s, %n (=\n)
+		System.out.printf("my food is %s%n", getFood());
+	}
+	
+}
+
+
+interface Barkable {
+	void bark();
+}
+
+
+class Animal {
+	
+	String name;
+	void setName(String name) {
+		this.name = name;
+		
+	}
+
+}
+
+// interface
+// 나는 동물원(zoo)의 사육사(zooKeeper)이다.
+// 육식동물(Predator)이 들어오면 먹이를 던져준다(feed).
+// 호랑이(tiger)가 오면 사과(apple)를 던져준다.
+// 사자(lion)가 오면 바나나(banana)를 던져준다.
+
+class Tiger extends Animal implements Predator, Barkable {
+
+	@Override // 어노테이션 (생략가능)
+	public String getFood() {
+		
+		return "apple";
+	}
+
+	@Override
+	public void bark() {
+		System.out.println("어흥");
+		
+		
+}
+	
+}     //Tiger은 Ani의 객체이기도하고 Pre의 객체기도함
+class Lion extends Animal implements Predator, Barkable{ //다형성: 여러개 상속 
+
+	@Override
+	public String getFood() {
+		
+		return "banana";
+}
+
+	@Override
+	public void bark() {
+		System.out.println("으르렁");
+	}
+}
+
+
+class ZooKeper {
+	
+	void feed(Predator predator) {
+		System.out.println("feed " + predator.getFood());
+	}
+	void feed(Tiger tiger) {
+		
+
+	}
+	
+}
+
+class Cry{
+	void barkAnimal(Barkable animal) {
+		animal.bark();
+	}
+}
+
+  public class exam{
+
+	public static void main(String[] args) {
+		
+		ZooKeper zooKeeper = new ZooKeper();
+		Tiger tiger = new Tiger();
+		Lion lion = new Lion();
+		zooKeeper.feed(tiger);
+		zooKeeper.feed(lion);
+		
+		Cry cry = new Cry();
+		cry.barkAnimal(tiger);
+		cry.barkAnimal(lion); // 어흥
+							//  으르렁
+		
+	}
+  }
+  
+  //배열 자료형선언
+  
+  public class ArrayExample {
+
+		public static void main(String[] args) {
+			//배열: 자료형의 집합체
+			int a;
+			a = 0;
+			
+			int[] odds = {1, 3, 5, 7, 9};//1. 배열 자료형 선언 첫번째 방법
+			System.out.println(odds[2]); // 5
+			int[] odds2 = new int[5];   // 2. 배열 자료형 선언 두번째 방법
+			odds2[0] = 1; // 저 위에 0번째 1(컴퓨터는 0부터시작)
+			odds2[1] = 2;
+			odds2[2] = 3;
+			odds2[3] = 4;
+			odds2[4] = 5;
+			 System.out.println(odds2[4]); // 5
+			
+			String[] weeks = {"월", "화", "수", "목", "금", "토", "일"};
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
