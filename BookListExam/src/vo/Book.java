@@ -4,7 +4,7 @@ public class Book {
 
 	
 	// 고유번호
-	private int id;
+	public static int id = 1000;
 	//책이름
 	private String bookName;
 	//작가
@@ -37,7 +37,7 @@ public class Book {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public Book(int id, String bookName, String author, int price) {
+	public Book( String bookName, String author, int price) {
 		
 		this.id = id;
 		this.bookName = bookName;

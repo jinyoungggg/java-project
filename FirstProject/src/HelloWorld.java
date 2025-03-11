@@ -2407,10 +2407,42 @@ class Cry{
 					}
 					
 					
-				}
-		
+				
+	//static 메모리에 먼저올라감 (먼저 생성돼있다.) 교재 181p
+					
+					public class Book {
 
-			}
+						
+						// 고유번호
+						public static int id = 1000;
+						
+						public class BookMain {
+
+							public static void main(String[] args) {
+								
+								// 1번째 방법
+								ArrayList<Book> list = new ArrayList<>();
+								Book book = new Book();
+								book.setBookName(" 태백산맥");
+								book.setAuthor(" 조정래");
+								book.setPrice(12000);
+								
+								
+								list.add(book);
+								book.id++;
+								
+								
+								Book book2 = new Book("데미안", "헤르만 헤세", 13000);
+								list.add(book2);
+								
+								for (int i = 0; i < list.size(); i++) {
+									System.out.println(list.get(i).toString());
+								}
+								
+							
+							//static 메모리에 먼저올라감 (먼저 생성돼있다.)
+
+			
  	}
  	}
 
