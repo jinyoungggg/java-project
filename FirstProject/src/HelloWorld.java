@@ -1262,7 +1262,7 @@ public class HelloWorld {
 					}
 
 					class HouseDog extends Dog {
-						// 메소드 오버라이딩 
+						// 메소드 오버라이딩 //덮어쓰기
 						void sleep() {
 							System.out.println(this.name + " zzz in house");
 						}
@@ -1914,6 +1914,8 @@ public class HelloWorld {
 
 // 다형성: 여러개상속
 
+import java.util.ArrayList;
+
 interface Predator {
 	String getFood ();//(인터페이스는 구현하는게아니고 선언부만)
 	// 디폴트 메서드
@@ -2037,14 +2039,380 @@ class Cry{
 
 	}
 
+// 7일차
+  
+  		// SQL
+  			//INSERT INTO "데이터베이스이름" VALUES 데이터칸이름{학년=3,나이=17,이름=ㅇㅇㅇ}
+
+
+//배열
+  
+	String[] weeks = new String[7];
+	for (int i = 0; i <=6; i++){
+		
+	
+		 weeks[0] = "월";
+		weeks[1] =  "화";
+		weeks[2] =  "수";
+		weeks[3] =  "목";
+		weeks[4] =	"금";
+		weeks[5] =	"토";
+		weeks[6] =  "일";
+		
+		System.out.println(weeks[i]);// (각각개행)월화수목금토일
+	}
+		
+		
+	
+	//length자동완성
+	
+	System.out.println(weeks.length);// 배열로 선언하고 자동완성 length: 길이를 알아서 측정해줌.
+	
+		for (int i = 0; i <=weeks.length; i++){// 배열로 선언하고 자동완성 length: 길이를 알아서 측정해줌.
+			System.out.println(weeks[i]);
+		}
+
+		
+		//연습문제
+		
+	
+
+//배열총합구하기 문제
+		
+		public static void main(String[] args) {
+			//배열, array
+			// 1차원 배열
+				int[] arr = {10, 20, 30, 40, 50};
+				int sum = 0;
+				
+				// 반복문으로 위의 배열 함산
+				
+				for(int i = 0; i <arr.length; i++) {// length는 개수(5개)이므로 < 써야함 
+					
+					 sum = sum + arr[i];
+				}
+				
+				System.out.println("sum = " + sum); //150
+				
+			}
+
+//2차원배열
+		
+		public class ArrayExample {
+
+			public static void main(String[] args) {
+			// 2차원 배열
+				int[][]arr = {
+						{5, 5, 5, 5, 5},
+						{10, 10, 10, 10, 10},
+						{20, 20, 20, 20, 20},
+						{30, 30, 30, 30, 30}
+				};
+				
+				int total = 0;
+				
+				float average = 0;
+				
+				
+				for (int i = 0; i < arr.length; i++) {
+					
+					for (int j = 0;j < arr[i].length; j++) {
+						total += arr[i][j];
+						//System.out.println("현재위치["+i+"]["+j+"]");
+					} 
+					
+			
+				} 
+				 average =  ((float)total / (arr.length * arr [0].length));//float으로 실수형태나오게
+				System.out.println("total = " + total);
+				System.out.println("average = " + average);
+				
+				
+//				total = 325
+//				average = 16.25
+
+				
+				
+				
+//				System.out.println("세로길이:"+arr.length);//세로4
+//				System.out.println("가로길이:"+arr[0].length);//가로5
+//				
+			}
+
+		}
+
+/*출력문제!!!!!
+500원: 5
+100원: 1
+50원: 1
+10원: 3	
+ */                  	public static void main(String[] args) {
+		            // 큰 금액의 동전을 우선적으로 거슬러 준다.	
+		                  int[] coinUnit = {500, 100, 50, 10};
+		
+		                  int money = 2680;
+		 
+		
+		for(int i = 0; i < coinUnit.length; i++) {
+			System.out.println(coinUnit[i]+ "원: " + money / coinUnit[i]);
+			money = money % coinUnit[i];	
+			
+			 
+		}	
+			
+//		   500원: 5
+//		   100원: 1
+//		   50원: 1
+//		   10원: 3
+
+	
+		
+		
+	}
+ 
+
+//일반 List와 ArrayList 차이
+ 
+ import java.util.ArrayList;
+
+ public class ArrayExample {
+
+ 	public static void main(String[] args) {
+ 		
+ 		String[] strs = new String[3];// 개수
+ 	    strs[0] = "1";
+ 	    strs[1] = "333";
+ 		strs[2] = "4567";		
+ 		System.out.println(strs[1]);
+ 		System.out.println(strs.length);
+ 		boolean isExist = false;
+ 		
+ 		for(int i = 0; i < strs.length; i++) {
+ 			if (strs[i].equals("4567")) {
+ 				isExist = true;
+ 			}
+ 		}
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		// ArrayList : 배열은 크기가 정해져 있는데,
+ 		// 리스트 크기가 변한다.
+ 		// <> : 제네릭 꺾쇠 안에 리스트의 자료형이 뭔지 표기한다.
+  		ArrayList<String> numbers = new ArrayList<>();//뒤쪽 제네릭은 써도되고안써도됨.
+ 		numbers.add("1");
+ 		numbers.add("333");
+ 		numbers.add("4567");
+ 		
+ 		String n1 = numbers.get(0);//위에 제네릭 String 안해주면 오류뜸
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		// get : 메서드 파라미터로 받는 index 번호의 값을 반환한다.
+ 		System.out.println(numbers.get(1));
+ 		//ArrayList에선 length 대신 size메서드가 배열의 길이 값을 반환한다
+ 		System.out.println(numbers.size());
+ 		//contains 리스트에서 해당 항복이 있는지 체크
+ 		System.out.println(numbers.contains("4567"));
+ 		//remove >> 2가지
+ 		// remove(객체) : true, false
+ 		// remove(인덱스번호) : 삭제한 인덱스의 다음 인덱스 값이 출력된다.
+ 		System.out.println(numbers.remove("1")); // true (index)
+ 		System.out.println(numbers.remove(1)); // 4567 (Object)
+ 		
+ 	}
+
+ }
+
+
+//연문 ??? 복습 필수
+ 
+ import java.lang.reflect.Array;
+ import java.util.ArrayList;
+ import java.util.Arrays;
+
+ public class ArrayList {
+
+ 	public static void main(String[] args) {
+ 		
+ 		String[] str = new String[3];// 개수
+ 		str[0] = "1";
+ 		str[1] = "2";
+ 		str[2] = "3";		
+ 		
+ 		// Arrays.asList => 이미 존재하는 문자열을 ArrayList로 만든다.
+ 		ArrayList<String> strList = new ArrayList<>(Arrays.asList(str));
+ 	    System.out.println(strList);
+
+ 		// "1,2,3,"
+         
+ 	    String result = "";
+ 	    
+ 	    //[1, 2, 3]
+ 	    
+ 	    
+ 	    for(int i = 0; i < strList.size(); i++) {
+ 	    	
+ 	    	result += strList.get(i);
+ 	    	result += ",";
+ 	    	}
+ 	    result = result.substring(0, result.length()-1); 
+         
+ 	    System.out.println(result );// 1,2,3
+ 		
+ 	    
+ 	 //이것을 join으로 간단하게   =>
+ 	    
+ 	   String[] str = new String[3];// 개수
+		str[0] = "1";
+		str[1] = "2";
+		str[2] = "3";		
+		
+		// Arrays.asList => 이미 존재하는 문자열을 ArrayList로 만든다.
+		ArrayList<String> strList = new ArrayList<>(Arrays.asList("1","2","3"));
+		String result = String.join(",", strList);
+		
+		System.out.println(result); // 1,2,3
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+		package main;
+
+		import vo.Book;
+
+		public class BookMain {
+
+			public static void main(String[] args) {
+				// 1번째 방법
+				Book book = new Book();
+				book.setBookName(" 태백산맥");
+				book.setAuthor(" 조정래");
+				book.setPrice(12000);
+				book.setId(1);
+				
+				System.out.println(book.toString());//Book클라스에 tostring 안해주면 book메소드주소나옴
+				
+				// 2번째 방법
+				Book book2 = new Book(2, "데미안", "헤르만 헤세", 13000);
+				System.out.println(book2.toString());
+			
+			
+			
+			
+			
+			
+			}
+			
+			
+	// 연습문제 
+	 //Book [id=1, bookName= 태백산맥, author= 조정래, price=12000]
+	 //Book [id=2, bookName=데미안, author=헤르만 헤세, price=13000]
+		
+ 		//메인클라스 BookMain
+			package main;
+
+			import java.util.ArrayList;
+
+			import vo.Book;
 
 
 
+			public class BookMain {
 
+				public static void main(String[] args) {
+					
+					// 1번째 방법
+					ArrayList<Book> list = new ArrayList<>();
+					Book book = new Book();
+					book.setBookName(" 태백산맥");
+					book.setAuthor(" 조정래");
+					book.setPrice(12000);
+					book.setId(1);
+					
+					list.add(book);
+					
+					Book book2 = new Book(2, "데미안", "헤르만 헤세", 13000);
+					list.add(book2);
+					
+					for (int i = 0; i < list.size(); i++) {
+						System.out.println(list.get(i).toString());
+					}
+				
+				
+				
+				
+				}
+				// 클라스 Book
+				
+				package vo;
 
+				public class Book {
 
+					
+					// 고유번호
+					private int id;
+					//책이름
+					private String bookName;
+					//작가
+					private String author;
+					//가격
+					private int price;
+					
+					
+					public int getId() {
+						return id;
+					}
+					public void setId(int id) {
+						this.id = id;
+					}
+					public String getBookName() {
+						return bookName;
+					}
+					public void setBookName(String bookName) {
+						this.bookName = bookName;
+					}
+					public String getAuthor() {
+						return author;
+					}
+					public void setAuthor(String author) {
+						this.author = author;
+					}
+					public int getPrice() {
+						return price;
+					}
+					public void setPrice(int price) {
+						this.price = price;
+					}
+					public Book(int id, String bookName, String author, int price) {
+						
+						this.id = id;
+						this.bookName = bookName;
+						this.author = author;
+						this.price = price;
+					}
+					public Book() {}
+					@Override
+					public String toString() {//객체생성 프라이빗 게터세터 투스트링(오버라이드) 한세트!
+						return "Book [id=" + id + ", bookName=" + bookName + ", author=" + author + ", price=" + price + "]";
+					}
+					
+					
+				}
+		
 
-
+			}
+ 	}
+ 	}
 
 
 
