@@ -2420,7 +2420,7 @@ class Cry{
 
 							public static void main(String[] args) {
 								
-								// 1번째 방법
+								
 								ArrayList<Book> list = new ArrayList<>();
 								Book book = new Book();
 								book.setBookName(" 태백산맥");
@@ -2440,9 +2440,889 @@ class Cry{
 								}
 								
 							
-							//static 메모리에 먼저올라감 (먼저 생성돼있다.)
+							//static 값공유, 메모리에 먼저올라감 (먼저 생성돼있다.)
 
-			
+		
+								
+								
+								
+								
+	// 8일차
+								
+								package main;
+
+								import java.util.ArrayList;
+
+								import vo.Book;
+
+
+
+								public class BookMain {
+
+									public static void main(String[] args) {
+										
+										// 1번째 방법
+										ArrayList<Book> list = new ArrayList<>();
+										Book book = new Book();
+										book.setBookName(" 태백산맥");
+										book.setAuthor(" 조정래");
+										book.setPrice(12000);
+										
+										
+										
+										list.add(book);
+										
+										
+										
+										
+										Book book2 = new Book("데미안", "헤르만 헤세", 13000);
+										list.add(book2);
+										
+										for (int i = 0; i < list.size(); i++) {
+											System.out.println(list.get(i).toString());
+										}
+										
+									//Book [bookId=1001, bookName= 태백산맥, author= 조정래, price=12000]
+									//Book [bookId=1002, bookName=데미안, author=헤르만 헤세, price=13000]
+									//static 메모리에 먼저올라감 (먼저 생성돼있다.)
+									}
+									
+								
+									
+									
+									
+									
+									
+									
+									package vo;
+
+									public class Book {
+
+										//static으로 선언하면 클라스로 공유
+										// 고유번호
+										private static int id = 1000;
+										private int bookId;
+										//책이름
+										private String bookName;
+										//작가
+										private String author;
+										//가격
+										private int price;
+										
+										
+										
+										
+										public int getBookId() {
+											return bookId;
+										}
+										public void setBookId(int bookId) {
+											this.bookId = bookId;
+										}
+										public int getId() {
+											return id;
+										}
+										public void setId(int id) {
+											this.id = id;
+										}
+										public String getBookName() {
+											return bookName;
+										}
+										public void setBookName(String bookName) {
+											this.bookName = bookName;
+										}
+										public String getAuthor() {
+											return author;
+										}
+										public void setAuthor(String author) {
+											this.author = author;
+										}
+										public int getPrice() {
+											return price;
+										}
+										public void setPrice(int price) {
+											this.price = price;
+										}
+										public Book( String bookName, String author, int price) {
+											
+											this.bookName = bookName;
+											this.author = author;
+											this.price = price;
+											this.generateId();
+											
+										}
+										private void generateId() {
+											id++;
+											this.bookId = id;
+										}
+										
+										public Book() {
+											System.out.println();
+											id++;
+											this.bookId = id;//gsdfghsfgsfg
+										}
+										@Override
+										public String toString() {
+											return "Book [bookId=" + bookId + ", bookName=" + bookName + ", author=" + author + ", price=" + price + "]";
+										}
+										
+										
+										}
+										
+										
+
+								}
+								
+								
+								
+	//parseInt			
+								String bookIdStr = sc.next();
+								//Integer.parseInt : String 형태의 숫자를 int 형태의 숫자로 바꿔준다.
+								bookId = Integer.parseInt(bookIdStr);
+								Double.parseDouble(bookIdStr);
+								String.valueOf(false);							
+								
+								
+								
+								
+								
+		//!!!지환님이 알려주신것		
+								
+								
+								
+								
+								
+								
+								
+								package vo;
+
+								public class Book {
+
+									//static으로 선언하면 클라스로 공유
+									// 고유번호
+									private static int id = 1000;
+									public int bookId;
+									//책이름
+									private String bookName;
+									//작가
+									private String author;
+									//가격
+									private int price;
+									// 생성일
+									private String createDate;
+									
+									
+									
+									
+									public String getCreateDate() {
+										return createDate;
+									}
+									public void setCreateDate(String createDate) {
+										this.createDate = createDate;
+									}
+									public int getBookId() {
+										return bookId;
+									}
+									public void setBookId(int bookId) {
+										this.bookId = bookId;
+									}
+									public int getId() {
+										return id;
+									}
+									public void setId(int id) {
+										this.id = id;
+									}
+									public String getBookName() {
+										return bookName;
+									}
+									public void setBookName(String bookName) {
+										this.bookName = bookName;
+									}
+									public String getAuthor() {
+										return author;
+									}
+									public void setAuthor(String author) {
+										this.author = author;
+									}
+									public int getPrice() {
+										return price;
+									}
+									public void setPrice(int price) {
+										this.price = price;
+									}
+									public Book( String bookName, String author, int price, String createDate ) {
+										
+										this.bookName = bookName;
+										this.author = author;
+										this.price = price;
+										this.generateId();
+										this.createDate = createDate;
+										
+									}
+									
+										
+									
+									private void generateId() {
+										id++;
+										this.bookId = id;
+									}
+									
+									public Book() {
+										System.out.println();
+										id++;
+										this.bookId = id;//
+									}
+									@Override
+									public String toString() {
+										return "Book [bookId=" + bookId + ", bookName=" + bookName + ", author=" + author + ", price=" + price
+												+ ", createDate=" + createDate + "]";
+									}
+									
+									
+									
+									}
+									
+									
+
+
+								
+								
+								
+								
+								
+								
+								package main;
+
+								import java.time.LocalDateTime;
+								import java.time.format.DateTimeFormatter;
+								import java.util.ArrayList;
+								import java.util.Scanner;
+
+import abstractEx.Calculator;
+import abstractEx.Computer;
+import abstractEx.MaxListCalculator;
+import abstractEx.NoteBook;
+import abstractEx.UpgradeCalculator;
+import utill.DateTimeUtill;
+								import vo.Book;
+
+
+
+								public class BookMain {
+
+									public static void main(String[] args) {
+								DateTimeUtill.getDateTime();
+										
+										
+										// 1. 날짜 생성해서 createDate에 파라미터로 넣기
+												//2. 메시지를 띄운다. (1 : book 추가생성 ㅣ\list에 밀어넣어, 2. book 항목 삭제
+										
+								DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
+								String formatedDate = LocalDateTime.now().format(dFormatter);
+										
+										// 1번째 방법
+										ArrayList<Book> list = new ArrayList<>();
+										Book book = new Book();
+										book.setBookName(" 태백산맥");
+										book.setAuthor(" 조정래");
+										book.setPrice(12000);
+										book.setCreateDate(formatedDate);
+										
+										
+										
+										list.add(book);
+										
+
+										
+										
+										Book book2 = new Book("데미안", "헤르만 헤세", 13000, formatedDate);
+										list.add(book2);
+										list.add(new Book("책1", "11", 13000, formatedDate));
+										list.add(new Book("책2", "11", 13000, formatedDate));
+										list.add(new Book("책3", "11", 13000, formatedDate));
+										list.add(new Book("책4", "11", 13000, formatedDate));
+										
+										
+										
+									   // list.add(new Book("23", "33", 33));
+										//추가할건지 삭제할건지 메세지를 띄운다.
+										// 1을 고르면 책을 추가하는 코드를 작성한다.
+										// 2를 입력하면 책을 삭제한다. 삭제할때 책의 식별자는 bookId 값으로 판단한다.
+										//삭제할때 bookId를 입력받을 수 있게 scanner를 띄운다.
+										//값을 입력 받으면 list를 순화하면서 동일한 bookId가 있으면 해당 책을 지운다.
+										
+										for(int j=0;j<list.size();j++)
+											System.out.println(list.get(j));
+										
+										do {
+										System.out.print("할일을 골라라.");
+										Scanner sc = new Scanner(System.in);
+										int workId = sc.nextInt();
+										
+										if(workId == 1) {
+											//추가
+											System.out.println("추가할 ID를 입력하세요.");
+											int addBook = sc.nextInt();
+											Book tmp = (new Book("책4", "11", 13000, formatedDate));
+											tmp.bookId=(addBook);
+											 list.add(tmp);
+											
+											
+										}else if (workId == 2) {
+											//삭제
+											System.out.println("삭제할 ID를 입력하세요.");
+											int bookId = sc.nextInt();
+											for (int i = 0; i < list.size(); i++) {
+												if (bookId == list.get(i).getBookId()) {
+													list.remove(i);
+												}
+											}
+											
+											/*list.get(i)
+											list목록안에서 i번째에있는것
+											의bookid를가져와*/
+											
+											//System.out.println(list.toString());
+											
+										}else {
+											//1,2이외 다른 숫자는 프로그램종료
+											System.out.println("프로그램 종료");
+											break;
+										}
+										for(int j=0;j<list.size();j++)
+											System.out.println(list.get(j));
+										
+										}while(true);
+										
+										
+										
+									
+										
+									}}
+										
+
+										
+//********연습문제개중요!!
+								
+								
+								package vo;
+
+								import utill.DateTimeUtill;
+
+								public class Book {
+
+									//static으로 선언하면 클라스로 공유
+									// 고유번호
+									public static int id = 1000;
+									private int bookId;
+									//책이름
+									private String bookName;
+									//작가
+									private String author;
+									//가격
+									private int price;
+									// 생성일
+									private  String createDate;
+									
+									
+									
+									
+									public String getCreateDate() {
+										return createDate;
+									}
+									public void setCreateDate(String createDate) {
+										this.createDate = createDate;
+									}
+									public int getBookId() {
+										return bookId;
+									}
+									public void setBookId(int bookId) {
+										this.bookId = bookId;
+									}
+									public int getId() {
+										return id;
+									}
+									public void setId(int id) {
+										this.id = id;
+									}
+									public String getBookName() {
+										return bookName;
+									}
+									public void setBookName(String bookName) {
+										this.bookName = bookName;
+									}
+									public String getAuthor() {
+										return author;
+									}
+									public void setAuthor(String author) {
+										this.author = author;
+									}
+									public int getPrice() {
+										return price;
+									}
+									public void setPrice(int price) {
+										this.price = price;
+									}
+									public Book( String bookName, String author, int price, String createDate ) {
+										
+										this.bookName = bookName;
+										this.author = author;
+										this.price = price;
+										this.generateId();
+										this.createDate = createDate;
+										
+									}
+									
+										
+									
+									private void generateId() {
+										id++;
+										this.bookId = id;
+									}
+									
+									public Book() {
+										System.out.println();
+										id++;
+										this.bookId = id;//
+									}
+									@Override
+									public String toString() {
+										return "Book [bookId=" + bookId + ", bookName=" + bookName + ", author=" + author + ", price=" + price
+												+ ", createDate=" + createDate + "]";
+									}
+									
+									
+									
+									}
+									
+									
+
+								package main;
+
+								import java.time.LocalDateTime;
+								import java.time.format.DateTimeFormatter;
+								import java.util.ArrayList;
+								import java.util.Scanner;
+
+								import utill.DateTimeUtill;
+								import vo.Book;
+
+
+
+								public class BookMain {
+									
+									public static void printBookList(ArrayList<Book> bookList) {
+										/*for (int i = 0; i< bookList.size(); i++) {
+											bookList.get(i).getPrice();
+											System.out.println(bookList.get(i).toString());
+									}*/   // 저 for문을 enhanced for문으로(예쁘게)
+										//enhanced for문
+										for ( Book book : bookList ) {
+											String result = "";
+											result += "책의 고유 번호 : " + book.getBookId();
+											result += " 제목 : " + book.getBookName();
+											result += " 작가 : " + book.getAuthor();
+											result += " 가격 : " + book.getPrice();
+											result += " 생성일 : " + book.getCreateDate();
+											
+											// String으로 문자열을 완성한거와 StringBuilder로 문자열을 완성한
+											StringBuilder str = new StringBuilder();
+											str.append(" 책의 고유 번호 : " + book.getBookId());
+											str.append(" 제목 : " + book.getBookName());
+											str.append( " 작가 : " + book.getAuthor());
+											str.append(" 가격 : " + book.getPrice());
+											str.append(" 생성일 : " + book.getCreateDate());
+											System.out.println(str.toString());
+										
+											
+											
+											
+											
+											
+											System.out.println(result);
+										}
+									}
+									public static void main(String[] args) {
+
+										
+										
+										// 1. 날짜 생성해서 createDate에 파라미터로 넣기
+												//2. 메시지를 띄운다. (1 : book 추가생성 ㅣ\list에 밀어넣어, 2. book 항목 삭제
+										
+								DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
+								String formatedDate = LocalDateTime.now().format(dFormatter);
+										
+										// 1번째 방법
+										ArrayList<Book> list = new ArrayList<>();
+										Book book = new Book();
+										book.setBookName(" 태백산맥");
+										book.setAuthor(" 조정래");
+										book.setPrice(12000);
+										book.setCreateDate(formatedDate);
+										
+										
+										
+										list.add(book);
+										
+
+										
+										
+										Book book2 = new Book("데미안", "헤르만 헤세", 13000, formatedDate);
+										list.add(book2);
+										list.add(new Book("책1", "11", 13000, formatedDate));
+										list.add(new Book("책2", "11", 13000, formatedDate));
+										list.add(new Book("책3", "11", 13000, formatedDate));
+										list.add(new Book("책4", "11", 13000, formatedDate));
+										
+										
+										
+									   // list.add(new Book("23", "33", 33));
+										//추가할건지 삭제할건지 메세지를 띄운다.
+										// 1을 고르면 책을 추가하는 코드를 작성한다.
+										// 2를 입력하면 책을 삭제한다. 삭제할때 책의 식별자는 bookId 값으로 판단한다.
+										// 3을 입력하면 책의 id값을 입력 받아서 해당 객체만 정보를 출력.
+										// 4를 입력하면 책의 id값을 입력받고, 입력받은 객체의 정보를 별도로 입력받아서 수정처리
+										//삭제할때 bookId를 입력받을 수 있게 scanner를 띄운다.
+										//값을 입력 받으면 list를 순화하면서 동일한 bookId가 있으면 해당 책을 지운다.
+										
+										for(int j=0;j<list.size();j++)
+											System.out.println(list.get(j));
+										
+										do {
+										System.out.print("할일을 골라라.");
+										Scanner scanner = new Scanner(System.in);
+										int workId = scanner.nextInt();
+										
+										// CRUD
+										//C : create
+										//R : read
+										//U : update
+										//D : delete
+										
+										if(workId == 1) {
+											//추가
+											Book newBook = new Book();
+											list.add(newBook);
+											System.out.println("책 제목: ");
+											String bookName = scanner.next();
+											newBook.setBookName(bookName);
+											System.out.println("저자 입력: ");
+											String bookAuthor = scanner.next();
+											newBook.setAuthor(bookAuthor);
+											System.out.println("가격 입력");
+											int bookPrice = scanner.nextInt();
+											newBook.setPrice(bookPrice);
+											
+											newBook.setCreateDate(formatedDate);
+											
+											BookMain.printBookList(list);
+											
+											
+										}else if (workId == 2) {
+											//삭제
+											System.out.println("삭제할 ID를 입력하세요.");
+											int bookId = scanner.nextInt();
+											for (int i = 0; i < list.size(); i++) {
+												if (bookId == list.get(i).getBookId()) {
+													list.remove(i);
+												}
+											}
+											BookMain.printBookList(list);
+										} else if (workId == 3) {
+											//1개 조회
+											System.out.println("조회할 ID를 입력하세요.");
+											int bookId = scanner.nextInt();
+											for (int j = 0; j <list.size(); j++) {
+												if (bookId == list.get(j).getBookId() ) {
+													System.out.println("조회결과:"+list.get(j));
+												}
+											}
+											 
+										}else if (workId == 4) {
+											// 1개 조회 후 수정
+											//수정:내용만바뀌면됨
+											//(1) 새 책을 만들어서 원래 책을 빼고 그자리에 넣기
+											//(2) 원래책한테 set~해서 고치기
+											//1.원래책찾기 (3번응용)
+											//2.원래책.set머시기하기
+											
+											System.out.println("조회할 ID를 입력하세요.");
+											int bookId = scanner.nextInt();
+											for (int j = 0; j <list.size(); j++) {
+												if (bookId == list.get(j).getBookId() ) {
+													System.out.println("조회결과:"+list.get(j));
+													System.out.println("고치려고 하는 책 제목: ");
+													String bookName = scanner.next();
+													list.get(j).setBookName(bookName);
+													System.out.println("수정한 작가");
+													bookName = scanner.next();
+													list.get(j).setAuthor(bookName);
+													System.out.println("수정한 가격");
+													int bookPrice = scanner.nextInt();
+													list.get(j).setPrice(bookPrice);
+													
+													
+			// 4 결과 대충 이렇게 나옴
+													
+				/*		Book [bookId=1001, bookName= 태백산맥, author= 조정래, price=12000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1002, bookName=데미안, author=헤르만 헤세, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1003, bookName=책1, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1004, bookName=책2, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1005, bookName=책3, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1006, bookName=책4, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						할일을 골라라.4
+						조회할 ID를 입력하세요.
+						1004
+						조회결과:Book [bookId=1004, bookName=책2, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						고치려고 하는 책 제목: 
+						오오
+						수정한 작가
+						진영
+						수정한 가격
+						1234
+						수정
+						Book [bookId=1001, bookName= 태백산맥, author= 조정래, price=12000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1002, bookName=데미안, author=헤르만 헤세, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1003, bookName=책1, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1004, bookName=오오, author=진영, price=1234, createDate=2025-03-12 16:44:13]
+						Book [bookId=1005, bookName=책3, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						Book [bookId=1006, bookName=책4, author=11, price=13000, createDate=2025-03-12 16:44:13]
+						할일을 골라라.				 */							
+					
+					
+												}
+											}
+											System.out.println("수정");
+											
+										}else {
+											//1,2,3,4이외 다른 숫자는 프로그램종료
+											System.out.println("프로그램 종료");
+											break;
+										}
+										for(int j=0;j<list.size();j++)
+											System.out.println(list.get(j));
+										
+										}while(true);
+										
+										
+										
+									
+										
+									}
+									}
+										
+
+										
+									
+										
+										
+									
+									
+		//while, do while								
+								
+								public class Loop {
+
+									public static void main(String[] args) {
+										// for, while(false면 아예 실행 ㄴ), do while(false여도 한번은 무조건실행)
+										
+										//while문
+									/*	int i = 0;
+										while(i > 0) {
+											System.out.println(Math.random());
+											
+										}
+								*/
+										
+										//do while문(false여도 한번은 무조건실행)
+										int i = 0;
+										do {
+											System.out.println(Math.random());
+											
+											
+										}while(i>0);
+										//한번실행됨
+									}
+
+								}						
+								
+								
+								
+								
+	//9일차
+								
+								
+		//abstract, interface
+								
+								
+								abstract class Computer{
+									abstract void display();
+									abstract void type();
+									public void turnOn() {
+										System.out.println("전원을 켠다.");
+									}
+									public void turnOff() {
+										System.out.println("전원을 끈다.");
+									}
+								}
+
+								class DeskTop extends Computer {
+
+									@Override
+									void display() {
+										System.out.println("computer display()");
+										
+									}
+
+									@Override
+									void type() {
+										System.out.println("computer type()");
+										
+									}
+									
+									
+								}
+								class NoteBook extends Computer {
+
+									@Override
+									void display() {
+										System.out.println("notebook display()");
+										
+									}
+
+									@Override
+									void type() {
+										System.out.println("notebook type()");
+										
+										
+									}
+
+								}
+
+								public class AbstractExample {
+
+									public static void main(String[] args) {
+										NoteBook noteBook = new NoteBook();
+										noteBook.display();
+										noteBook.type();
+										noteBook.turnOn();
+										noteBook.turnOff();
+										//notebook display()
+										notebook type()
+										전원을 켠다.
+										전원을 끈다.
+
+									}
+
+								}						
+								
+								
+								
+	//상속문제
+								
+								
+								package abstractEx;
+
+
+								class Calculator{
+									int value=0;
+									Calculator(){
+										this.value = 0;
+									}
+									void add(int val) {
+										this.value += val;
+									}
+									int getValue() {
+										return this.value;
+									}
+								}
+
+
+
+
+								class MaxListCalculator extends Calculator{
+
+									@Override
+									int getValue() {
+										
+										return this.value > 100 ? 100 : this.value;
+									}
+
+
+								}
+								public class AbstractExample {
+									public static void main(String[] args) {
+									
+									
+										Calculator cal = new Calculator();
+										cal.add(10);
+										System.out.println(cal.getValue());
+										
+										
+										//1. UpgradeCalculator클래스를 만들고
+										// 값을 뺄 수 있는 minus 메서드를 추가하자.
+										UpgradeCalculator ucal = new UpgradeCalculator();
+										
+										ucal.add(10);
+										ucal.minus(3);
+										System.out.println(ucal.getValue()); //7
+										
+										
+										
+										 //2. 객체변수 value가 100보다 큰 값을 가질 수 없도록 제한하는 동작
+										MaxListCalculator mcal = new MaxListCalculator();
+										mcal.add(50);
+										mcal.add(60);
+										System.out.println(mcal.getValue());//100출력
+								}
+								}
+
+
+								
+								package abstractEx;
+
+								public class UpgradeCalculator extends Calculator {
+
+									void minus(int val) {
+										this.value -= val;
+										
+									}
+
+								}
+
+								
+								
+								//객체 비교	
+								ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(1,2,3));
+								ArrayList<Integer> b = new ArrayList<Integer>(a);//b에다가 a의 내용을 가진 list를 새로만들어서 넣어라.
+								// a와 b는 서로 다른 존재
+								
+								
+								
+								
+								a.add(4);// a값은 (1,2,3,4) b값은 (1,2,3)
+								
+								
+								System.out.println(b == a); //false
+								
+								
+								
+								
+								ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(1,2,3));
+								ArrayList<Integer> b = a;// b에 a가 컴퓨터에 저장된 위치를 넣는다.(a와 b는 같은존재)
+								
+								
+								
+								
+								a.add(4); //  a값은 (1,2,3,4) b값도 (1,2,3,4)
+								
+								
+								System.out.println(b == a); //true
+								
+								
+
  	}
  	}
 
