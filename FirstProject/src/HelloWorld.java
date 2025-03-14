@@ -2237,91 +2237,15 @@ class Cry{
  import java.lang.reflect.Array;
  import java.util.ArrayList;
  import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
- public class ArrayList {
+import vo.Book;
+import vo.Material;
 
- 	public static void main(String[] args) {
- 		
- 		String[] str = new String[3];// 개수
- 		str[0] = "1";
- 		str[1] = "2";
- 		str[2] = "3";		
- 		
- 		// Arrays.asList => 이미 존재하는 문자열을 ArrayList로 만든다.
- 		ArrayList<String> strList = new ArrayList<>(Arrays.asList(str));
- 	    System.out.println(strList);
-
- 		// "1,2,3,"
-         
- 	    String result = "";
- 	    
- 	    //[1, 2, 3]
- 	    
- 	    
- 	    for(int i = 0; i < strList.size(); i++) {
- 	    	
- 	    	result += strList.get(i);
- 	    	result += ",";
- 	    	}
- 	    result = result.substring(0, result.length()-1); 
-         
- 	    System.out.println(result );// 1,2,3
- 		
- 	    
- 	 //이것을 join으로 간단하게   =>
- 	    
- 	   String[] str = new String[3];// 개수
-		str[0] = "1";
-		str[1] = "2";
-		str[2] = "3";		
-		
-		// Arrays.asList => 이미 존재하는 문자열을 ArrayList로 만든다.
-		ArrayList<String> strList = new ArrayList<>(Arrays.asList("1","2","3"));
-		String result = String.join(",", strList);
-		
-		System.out.println(result); // 1,2,3
- 		
- 		
- 		
- 		
- 		
- 		
-		package main;
-
-		import vo.Book;
-
-		public class BookMain {
-
-			public static void main(String[] args) {
-				// 1번째 방법
-				Book book = new Book();
-				book.setBookName(" 태백산맥");
-				book.setAuthor(" 조정래");
-				book.setPrice(12000);
-				book.setId(1);
-				
-				System.out.println(book.toString());//Book클라스에 tostring 안해주면 book메소드주소나옴
-				
-				// 2번째 방법
-				Book book2 = new Book(2, "데미안", "헤르만 헤세", 13000);
-				System.out.println(book2.toString());
-			
-			
-			
-			
-			
-			
-			}
-			
-			
-	// 연습문제 
-	 //Book [id=1, bookName= 태백산맥, author= 조정래, price=12000]
-	 //Book [id=2, bookName=데미안, author=헤르만 헤세, price=13000]
-		
- 		//메인클라스 BookMain
-			package main;
-
-			import java.util.ArrayList;
+import java.util.ArrayList;
 
 			import vo.Book;
 
@@ -2702,6 +2626,10 @@ import abstractEx.Computer;
 import abstractEx.MaxListCalculator;
 import abstractEx.NoteBook;
 import abstractEx.UpgradeCalculator;
+import main.Car;
+import main.CarFactory;
+import main.Company;
+import main.Person;
 import utill.DateTimeUtill;
 								import vo.Book;
 
@@ -3322,6 +3250,10 @@ import utill.DateTimeUtill;
 								System.out.println(b == a); //true
 								
 								
+								
+			//쓰는법printf("글자글자%s%d",얘를첫번째나온%에넣어주세요,2번째%,3,4,5,...)
+						System.out.printf("%d번입니다 %s쓸수있습니다",1,"이렇게");	
+					//1번입니다 이렇게쓸수있습니다	
 
  	}
  	}
@@ -3329,7 +3261,862 @@ import utill.DateTimeUtill;
 
 
 
+10일차
 
+String a = "aa";
+//Object에서 공통으로 사용하는 메서드
+String b = a.toString();// 객체를 문자열로 표현
+boolean r = a.equals(""); // .앞에 있는 내용과 괄호 안의 내용 비교
+a.hashCode();//해시코드 : 메모리주소값 출력
+a.getClass();// 객체의 class를 반환
+
+
+
+String a = "hello world";
+// index 번째 문자 출력
+System.out.println(a.charAt(0)); // charAt(0); : 인덱스 0번째  출력 h
+System.out.println(a.concat("!!"));// concat(); 이어붙히기 hello world!!
+System.out.println(a.contains("w"));// contains(); : 포함여부 true
+System.out.println(a.length()); // 문자열 길이 11
+System.out.println(a.substring(3));// 문자열의 인덱스번호 부터 끝까지의 문자열반환  lo world
+System.out.println(a.substring(3,6)); // 문자열의 beginIndex부터 endIndex까지 문자열 반환 lo
+System.out.println(a.indexOf("world"));// 문자열에서 주어진 문자열이 처음 나타나는 index반환 6
+String str = "Hello world world";
+System.out.println(str.lastIndexOf("world")); // 문자열에서 주어진 문자열이 마지막으로 나타나는 index 반환 12
+String str1 = "hello";
+String str2 = "Hello";
+System.out.println(str1.equals(str2));//문자열이 동일한지 비교 true
+String str3 = new String("hello");
+String str4 = new String("Hello");
+System.out.println(str3 == str4); // false 객체의 값을 비교하는게 아니고 객체 그 자체를 비교 
+System.out.println(str3.equals(str4));// true  String은 equals로 비교!!
+System.out.println(str1 == str2);// false 문자열을 대소문자 구분하지 않고 비교+
+System.out.println(str1.equalsIgnoreCase(str2));// true문자열을 대소문자 구분하지 않고 비교+
+System.out.println(a.replace("world", "java"));// 문자열에서 특정 문자열을 다른 문자열로 바꾼다. hello java
+System.out.println(a.toUpperCase());// 문자열을 대문자로 변환 HELLO WORLD
+String str6 = "HELLO WORLD";
+System.out.println(str6.toLowerCase());// 문자열을 소문자로 변환 hello world
+String str7 = " hello ";
+System.out.println(str7.trim());// 문자열의 앞 뒤 공백 제거 hello
+String str8 = "apple,banana,cherry";
+String[] fruits = str8.split(",");
+System.out.println(Arrays.toString(fruits)); // split 지정한 구분자를 기준으로 문자열을 배열로 반환 [apple, banana, cherry]
+String str9 = "Hello";
+System.out.println(str9.startsWith("He"));// 문자열이 지정된 접두어로 시작하는지 확인 true
+System.out.println(str9.endsWith("lo")); // 문자열이 지정된 접미어로 끝나는지 확인  true
+String str10 = "";
+System.out.println(str10.isEmpty());// 문자열이 비어 있는지 확인(길이가 0인지 확인) true
+String str11 = " ";
+System.out.println(str11.isBlank());// 문자열이 비어있거나 공백만 있는지 확인 true
+int num = 123;
+String str12 = String.valueOf(num);
+System.out.println(str12); //객체를 문자열로 변환 123
+String str100 = "abc123";
+boolean match = str100.matches("[a-z]+\\d+");
+System.out.println(match);// 문자열이 주어진 정규식과 일치하는지 확인 true
+
+
+
+//연습문제
+		//문자열의 길이가 홀수일 경우, 한 문자를 출력하고, 짝수일 경우 중간 두 문자를 출력
+		//입력 : Java 
+		//출력 : av 2
+		//입력 : Programming 11
+		//출력 : a
+			
+			/*String exStr = "Java";
+			int exStrLength = exStr.length();
+			String exResult = (exStrLength % 2 - 1, exStrLength / 2 + 1);
+				exStr.substring(exStrLength / 2, exStrLength / 2 + 1);
+				System.out.println(exResult);*/
+				
+			
+		   //아래 문자열에서 첫번째 단어를 추출해라. 단어는 공백으로 구분된다.
+				String ex2 = "I Love Java";
+				String firstWord = ex2.split(" ")[0];
+				System.out.println(firstWord); // I I
+				
+				//010-1234-5678 주어진 문자를 - 를 제거하고 숫자만 출력
+			
+				String ex3 = "010-1234-5678";  
+				System.out.println(ex3.replace("-", " ")); //010 1234 5678
+				
+				
+			//https://www.naver.com/path 문자열에서 naver.com만 출력
+				
+				String naver = " https://www.naver.com/path";
+				String domain = naver.substring(naver.indexOf("www.")+ 4, naver.indexOf(".com")+4);
+				
+				System.out.println(domain); //naver.com
+				
+			// 20250314 => 2025-03-14	
+				String date = "20250314";
+				
+				System.out.println(date.substring(0,4)+ "-"+date.substring(4, 6)+ "-"+ date.substring(6,8));
+		
+				
+
+				
+		//연습문제 클래스, 배열, 메소드생성 총정리할 수 있을듯
+				//꼭다시한번 볼것		
+				
+				
+				
+				
+			문제	/* Buyer 클래스 : money, 
+				 * cart(배열)  
+				 * 메서드: buy(구입),add(장바구니추가),summary(구입한물건목록,사용금액,남은금액)
+						Product 클래스 어레이선언 초기화: price
+						상속받는 클래스 Tv(100), Computer(200), Audio(50)
+						
+					메서드명 : buy
+					기능: 물건구입, 가진 돈에서 물건값을 빼고 장바구니에 담는다. 만약
+						     가진돈이 물건의 가격보다 적으면 바로 종료한다.
+				        반환타입 : x
+					 파라미터 : Product(구입할물건) 
+
+				    메서드명: add
+
+						 기능: 지정된 물건(a)을 장바구니(cart)에 담는다.(.add)
+
+						 반환타입 : x
+						 파라미터 : Product
+						 
+						 메서드명 : summary
+						 기능 : 구입한 물건의 목록(cart)과 사용금액(p.price), 남은금액(money) 출력
+						 반환타입: x
+						 파라미터: x   
+						 
+						 
+				package abstractEx;
+
+				import java.util.ArrayList;
+				import java.util.Arrays;
+
+				class Buyer {
+					int price;
+					int money = 1000;
+					ArrayList<Product> cart = new ArrayList<Product>();
+					
+					//목록 <여기에 들어갈수있는 종류 (숫자만들어와,글자만,Product> 배열명
+					
+						Buyer(int price) {
+							System.out.println("cart"+cart);
+						}
+						/*
+						 * 메서드명 : buy
+						기능: 물건구입, 가진 돈에서 물건값을 빼고 장바구니에 담는다. 만약
+						     가진돈이 물건의 가격보다 적으면 바로 종료한다.
+						    반환타입 : x
+						    파라미터 : Product(구입할물건) 
+						 */
+						
+						//메서드 ()  < ()의 내용은 메서드를 실행할때 추가요청사항
+						//예시) 커피주세요(사이즈업,크림추가)
+						//커피기능 +사이즈변경+크림까지
+						
+						//사주세요()  << ??
+						
+						//사주세요(tv)
+						//돈 - TV.가격
+						//장바구니.추가(tv)
+						//만약(가진돈<물건가격)
+						
+						//코딩하다가 고려해야할점.
+						
+						//지금 가진돈에서 가격을빼고, 돈이적은지 판단하는데
+						//내가 100원있는데 1000원tv를살수있다
+
+						//내가돈이있으면?
+						//살수있다
+						
+						//살수있다
+						//내가돈이있으면?
+						
+						//바로종료
+						
+						void buy(Product p) {//파라미터 : Product(구입할물건)
+							if(money < p.price) { //만약   가진돈이 물건의 가격보다 적으면 
+								System.out.println("잔액부족해서 "+p+"를 못샀다");
+								
+								return; //바로 종료한다.
+								
+							} 
+							money = money - p.price; //가진 돈에서 물건값을 빼고
+							cart.add(p); //장바구니에 담는다. 
+							
+						}
+						void add(Product a) {
+							cart.add(a);
+						}
+						
+						void summary() {
+							//for(~;~;~) (평소
+							//목록같은거를 자동으로 반복하게 하려면
+							// for( 목록에들어간내용 변수명 : 목록이름)  <이러면 목록에 들어가있는 개수만큼 알아서 반복
+							for(Product p : cart) {
+								System.out.print(p+"사용한 금액은:");
+								System.out.println(p.price);
+								
+								
+								
+								
+							}
+							System.out.println("남은 돈은:" + money);
+						}
+
+						
+				}
+				class Product {
+					int price;
+					Product(int price){
+						this.price = price;
+						
+					}
+					
+				}
+
+
+				class Tv extends Product{
+					Tv(){
+						super(100);//파라미터없으면 디폴트메서드생성 파라미터 있으면 부모클래스 파라미터호출
+					}
+					@Override
+					public String toString() {
+						return "TV";
+					}
+				}
+				class Computer extends Product{
+					Computer(){
+						super(200);
+					}
+					@Override
+					public String toString() {
+						return "Computer";
+					}
+				}
+				class Audio extends Product{
+					Audio(){
+						super(50);
+					}
+					@Override
+					public String toString() {
+						return "Audio";
+					}
+				}
+
+
+
+
+
+
+
+
+
+				public class AbstractExample {
+					public static void main(String[] args) {
+					
+						
+					    Buyer a = new Buyer(1000);
+						a.buy(new Tv());
+						a.buy(new Computer());
+						a.buy(new Audio());
+						a.buy(new Computer());
+						a.buy(new Computer());
+						a.buy(new Computer());
+						a.buy(new Computer());
+						a.summary();
+						
+						
+				    /*
+				      cart[]
+				잔액부족해서 Computer를 못샀다
+				TV사용한 금액은:100
+				Computer사용한 금액은:200
+				Audio사용한 금액은:50
+				Computer사용한 금액은:200
+				Computer사용한 금액은:200
+				Computer사용한 금액은:200
+				남은 돈은:50
+
+				      */
+						
+						
+						
+						
+						
+						
+	//11일차
+						
+		//초보자가 많이하는실수
+			//wrapper , primitive type 차이구별
+					//primitive type
+						//int, double, float, boolean, char 등등
+						//값 자체를 메모리(stack)에 직접 저장
+						
+					
+						int a= 10;
+						int b = a;
+						b = 20;
+						System.out.println(a);//10
+						
+			    //wrapper class, reference type
+						//String, Integer, Boolean, Double, Float, ArrayList 등등
+						//boolean true, false
+						// Boolean true, false, null
+						//wrapper클래스는 메모리(Heap)에 저장되고, 메모리(Stack)는 참조(주소)만 저장된다.
+						//Integer는 참조타입인데 불변 객체라서 y = 200을 대입하면
+						//새로운 객체를 생성하고 y에 값을 할당
+						//따라서 x값은 그대로 남았다.
+						
+						//int z = null; // wrapper 클래스 써야 null;쓸수있다.
+						Integer z = null;
+						String zz = null;
+						
+						Integer x = 100;
+						Integer y = x;
+						y = 200;
+						System.out.println(x);//100
+						
+						
+				//배열 또는 ArrayList
+						int[]arr1 = {1, 2, 3};
+						int[]arr2 = arr1;
+						arr2[0] = 100;
+						System.out.println(arr1[0]); //100
+						// 100나오는 이유: 배열은 참조타입 그래서 arr1과 arr2가 같은 배열을 가르킴
+						// arr2의 값을 바꾸면 arr1의 값도 바뀐다.
+						int[] arr3 = arr1.clone();		//복사
+						arr3[0] = 100;
+						System.out.println(arr1[0]);
+						
+							
+			 // ==와 .equals()
+						// 기본타입은 ==로 비교
+						int a = 0;
+						int b = 0;
+						System.out.println(a == b);
+						
+						Integer c = new Integer(100);
+						Integer d = new Integer(100);
+						System.out.println(c == d); // false 메모리주소비교
+						System.out.println(c.equals(d)); // true	
+						
+						
+						
+
+				// 자동 형변환과 강제 형변환
+					// 자동 형변환
+						// 자료형이 작은타입에서 큰타입으로 바꿀때는 자동 형변환
+						// 큰 타입에서 작은 타입으로 바꿀때는 캐스팅 필요
+						int num = 10;
+						double d = num;
+						System.out.println(d); //10.0
+						
+						double d2 = 10.55;
+						int num2 = (int)d2;
+						System.out.println(num2); // 10
+						
+						// int / int =>> (double) 앞에붙혀줘야함
+						int a = 5;
+						int b = 2;
+						System.out.println((double)a/b);//2.5
+						
+						// int 범위를 벗어나는 변수값
+						// 214783648
+						//int max = 12345678900;
+						// 범위를 벗어나면 long을 사용하자
+						long max2 = 12345678900L;
+						
+						
+			// 객체 초기값 누락 null point exception  (NPE)
+//						String str;
+//						System.out.println(str.length());
+						
+				//대입연산자와 비교연산자 혼동
+						boolean result = true;
+						if(result == true) 
+							System.out.println(true);// =, == 헷갈 ㄴ
+								
+						// ArrayList와 for each
+						ArrayList<String> list = new ArrayList<String>(Arrays.asList("1","2","3"));
+						for ( String s : list ) {
+							if (s.equals("2")) s= "100"; //[1, 2, 3]  ArrayList에선 이렇게함안됨 밑에 루프문으로
+							}
+							for (int i = 0; i < list.size(); i++) {
+								if(list.get(i).equals("2")) {
+									list.set(i, "100");
+								}
+							}
+							System.out.println(list); // [1, 100, 3]		
+						
+						
+						
+						
+							class Person{
+								String name;
+								
+								Person(){
+									this(); // 생성자가 없을때 this 쓰면 호출할게없으니 오류뜸
+								}
+							}			
+						
+						
+						
+						
+						
+						
+							public class exam{
+								// static 변수  메모리 엑세스 속도 빠르다
+								static int staticVar = 0;
+								//final 상수 재정의못함(걍한번에구분하려고변수언더스코어로 씀)
+								static final int STATIC_FINAL_VAR = 0;
+								
+								
+								
+								public static void main(String[] args) {
+									
+									// static 변수 접근 시간 측정
+									long startTime = System.nanoTime();
+									for (int i = 0; i < 1000000000; i++) {
+										staticVar = staticVar  + 1; // static 변수에 접근
+										
+										
+										
+									}
+									long endTime = System.nanoTime();
+									long staticTime = endTime = startTime;
+									
+									//static final 변수 접근 시간 측정
+								    startTime = System.nanoTime();
+								    for (int i = 0; i < 1000000000; i++) {
+										int temp = STATIC_FINAL_VAR; 
+								    }
+									
+								    endTime = System.nanoTime();
+								    long staticFinalTime = endTime = startTime;
+								    
+								    System.out.println("Static 속도 :"+ staticTime + "ns"  );
+								    System.out.println("Static final 속도 :"+ staticFinalTime + "ns"  );
+									//static final이 더빠르다
+												
+						
+						
+						
+						
+						
+	// 제네릭
+								    
+								    
+		   package main;
+
+		 import java.util.ArrayList;
+         import vo.Plastic;
+	     import vo.Powder;
+		 import vo.ThreeDPrinter;
+
+								    public class Main {
+
+								    	public static void main(String[] args) {
+								    		
+//								    		ThreeDPrinter p1 = new ThreeDPrinter();
+//								    		Powder p = new Powder();
+//								    		p1.setMaterial(p);
+//								    		
+//								    		powder pp = p1.getMaterial();
+//								    		
+								    		ThreeDPrinter<Powder> p1 = new ThreeDPrinter();
+								    		Powder p = new Powder();
+								    		p1.setMaterial(p);
+								    		Powder pp = p1.getMaterial();
+								    		
+								    		ThreeDPrinter<Plastic> p2 = new ThreeDPrinter();
+								    		Plastic ps = new Plastic();
+								    		p2.setMaterial(ps);
+								    		Plastic pss = p2.getMaterial();//다운캐스팅할필요없이 바로 형변환
+								    		
+								    		
+								    		
+								    		
+								    		
+								    }
+
+								    }
+								    
+								    package vo;
+
+								    public class ThreeDPrinter<T extends Material> {
+								    	
+								    	private T material;
+
+								    	public T getMaterial() {
+								    		return material;
+								    	}
+
+								    	public void setMaterial(T material) {
+								    		this.material = material;
+								    	}
+								    	
+
+								    }
+				    
+								    package vo;
+
+								    public class Powder extends Material {
+								    	public void doPrint() {
+								    		System.out.println("Powder 재료로 출력");
+								    	}
+
+								    	@Override
+								    	public String toString() {
+								    		return "재료는 Powder입니다";
+								    	}
+								    	
+								    }
+								    
+								    package vo;
+
+								    public class Plastic extends Material {
+								    	public void doPrint() {
+								    		System.out.println("Plastic 재료로 출력");
+								    	}
+
+								    	@Override
+								    	public String toString() {
+								    		return "재료는 Plastic입니다";
+								    	}
+								    }
+				    
+								    
+								    
+								    package vo;
+
+								    public abstract class Material {
+
+								    }
+		    
+								    
+		//12일차
+								    
+								    class Person {
+								    	String name;
+								    	String birth;
+								    	int age;
+								    	public int getAge() {
+								    		return age;
+								    	}
+								    	public void setAge(int age) {
+								    		this.age = age;
+								    	}
+								    	public String getName() {
+								    		return name;
+								    	}
+								    	public void setName(String name) {
+								    		this.name = name;
+								    	}
+								    	public String getBirth() {
+								    		return birth;
+								    	}
+								    	public void setBirth(String birth) {
+								    		this.birth = birth;
+								    	}
+								    	
+								    	// getter, setter, constructor
+								    }
+
+								    public class Mainn {
+
+								    	public static void main(String[] args) {
+								    		// 컬렉션 프레임 워크
+								    		// 자바에서 데이터를 저장하고 관리하는 방법을 제공하는 클래스, 인터페이스의 집합
+								    		// 여러개의 데이터를 효율적으로 다루기 위한 도구
+								    		//핵심
+								    		// 데이터구조 : 데이터를 어떻게 저장하고 접근할건가의 구조 정의
+								    		// 효율적관리 : 데이터를 쉽게 추가, 삭제, 변경, 순회하는 작업을 효율적으로 할 수 있게 해준다.
+								    		
+								    		// 컬렉션 프레임워크 : 컬렉션, 맴 두가지로 나뉜다.
+								    		// 1. 컬렉션 : 여러 개의 데이터를 하나의 객체로 다루는 방법을 제공
+								    		// 2. 맵 : 키와 값 쌍으로 이루어진 데이터 구조이고 중복되지 않는 키를 사용해서 값을 찾을 수 있다.
+								    		
+								    		String [] nums = new String[] {"333", "123", "256"};
+								    		List<String> numsList = new ArrayList<String>(Arrays.asList("333", "123", "256"));
+								    		numsList.sort(Comparator.naturalOrder()); // naturalOrder 오름차순해주는 자동메서드 [123, 256, 333]
+								    		System.out.println(numsList);
+								    		numsList.sort(Comparator.reverseOrder());
+								    		System.out.println(numsList);//reverseOrder 내림차순해주는 자동메서드 [333, 256, 123]
+								    		
+								    		// add 컬렉션에 데이터를 추가한다.
+								    		numsList.add("444");
+								    		System.out.println(numsList); //[333, 256, 123, 444]
+								    		numsList.remove("444"); // remove
+								    		numsList.remove(0); 
+								    		System.out.println(numsList);  // [256, 123]
+								    		
+								    		// size()
+								    		System.out.println(numsList.size()); //4
+								    		
+								    		//clear()
+								    		numsList.clear();
+								    	    System.out.println(numsList); //[]
+								    	    
+								    	    //Iterator
+								    	    
+								    	    //맵 : 사전과 비슷하다.
+								    	    // people : 사람, baseball : 야구
+								    	    // name : 최종선, birth : 20000101
+								    	    //   key        :   value
+								    	    // key와 value가 쌍으로 이루어 진걸 맵이라고 한다.
+								    	    // Map : HashMap, LinkedHashMap, TreeMap 등등
+								    	    // VO
+								    	    Person person = new Person();
+								    	    person.setName("최종선");
+								    	    person.setBirth("20000101");
+								    	    person.setAge(10);
+								    	    String name = person.getName();
+								    	    String birth = person.getBirth();
+								    	    int age = person.getAge();
+								    	    List<Person> personList = new ArrayList<>();
+								    	    personList.add(person);
+								    	    
+								    //HashMap사용법	   
+								    	    HashMap<String, Object> hashMap = new HashMap<>();
+								    	    hashMap.put("name", "최종선");
+								    	    hashMap.put("birth", "20000101");
+								    	    hashMap.put("age", 10); //저위에 Object로 해놔서 숫자 넣을수있음
+								    	    String name2 = (String) hashMap.get("name");
+								    	    String birth2 = (String) hashMap.get("birth");
+								    	    int age2 = (int) hashMap.get("age");
+								    	    // containsKey : 맵에 해당 key가 있는지 true, false로 리턴
+								    		   System.out.println(hashMap.containsKey("birth")); // true
+								    		  // remove : 맵의 항목을 삭제한다. 해당 key로 항목을 삭제 후 value를 리턴
+								    		   System.out.println(hashMap.remove("name"));//최종선
+//								    		   System.out.println(hashMap.toString()); //{birth=20000101, age=10} 이름지워짐 ㅇㅇ
+								    		
+								    		   System.out.println(hashMap.size());
+								    		    System.out.println(hashMap.keySet()); 
+								    		    List<String> KeyList = new ArrayList<>(hashMap.keySet());
+								    		    
+
+								    		   
+								    	   List<HashMap<String, Object>> hashMapList = new ArrayList<>();	
+								    	   hashMapList.add(hashMap);
+								    	
+					//중요			    	   //Map >>> HashMap, LinkdeHashMap, TreeMap
+								    	   // LinkdeHashMap : 입력된 순서대로 데이터를 저장
+								    	   // TreeMap : 입력된 Key의 오름차순으로 데이터를 저장
+								    	   
+								    	   
+								    	
+								    	 //집합 : 중복 허용 불가, 순서가 없다
+								   		//HashMap, LinkedHashMap,  TreeMap
+								   		// 집합자료형 : 집합과 관련된 것을 쉽게 처리하기 위해 만들었다.
+								   		// HashSet, LinkedHashSet, TreeSet
+								   		
+								   		HashSet<String> set = new HashSet<>(Arrays.asList("H", "e", "l", "l", "o"));
+//								   		System.out.println(set);
+								   		
+								   		
+								   		
+								   		
+								   		// 교집합구하기 : retainAll
+								   		// HashSet 하나 더 생성 >>> new 연산자의 파라미터를 s1넣는다.
+								   		// retainAll 메서드의 파라미터를 s2 넣는다
+								   		//로그에찍는다
+								   		
+								   		
+								   		
+								   		
+								   		HashSet<Integer> s1 = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
+								   		HashSet<Integer> s2 = new HashSet<>(Arrays.asList(4,5,6,7,8,9));
+								   		
+								   		 HashSet<Integer> 교집합세트 = new HashSet<>(s1);
+								    	    교집합세트.retainAll(s2);
+								   		System.out.println(교집합세트); //[4, 5, 6]
+								   		
+								   		//합집합구하기 : addAll
+								   		
+								   		 HashSet<Integer> 합집합세트 = new HashSet<>(s1);
+								   		 합집합세트.addAll(s2);
+								   		 System.out.println(합집합세트); //[1, 2, 3, 4, 5, 6, 7, 8, 9]
+								   		 
+								   		//차집합구하기 : removeAll
+								   		 HashSet<Integer> 차집합세트 = new HashSet<>(s1);
+								   		 차집합세트.removeAll(s2);
+								   		 System.out.println(차집합세트); // [1, 2, 3]
+								   	
+								   		 // add, addAll, remove
+								   		 차집합세트.add(100);
+								   		 차집합세트.addAll(Arrays.asList(55,66,77));
+								   		 차집합세트.remove(55);
+								   		 
+								   		 
+								   		// HashMap, List
+								   		 // LinkdeHashMap : 입력된 순서데로 데이터 저장
+								   		 // TreeMap : 입력한 key의 오름차순 데이터 저장			    	
+								    	
+								    	
+								    	
+								    	
+								    	}
+
+								    }
+				   
+								    
+								    
+								    
+								    
+								    
+								    
+								    package main;
+
+								    import java.util.HashSet;
+
+								    class Student {
+								    	String name;
+								    	String id;
+								    	public Student(String id, String name) {
+								    		this.id = id;
+								    		this.name = name;
+								    	}
+								    	
+								    	나랑 쟤랑 같은지 검사해줘
+								    	나(학생) 쟤(??)
+								    	나(학생) 쟤(학생) 이면 둘이 같은건지 검사
+								    	나(학생) 쟤(학생은아닐때) 그럼 무조건 다른거니까 하지마
+								    	나(학생) 쟤(학생)
+								    	쟤(사람)
+								    	나(학생) 쟤( (학생)사람 )
+								    	
+								    	public boolean equals(Object obj) {
+								    		if (obj instanceof Student) {
+								    			Student s = (Student) obj;
+								    			return (this.id == s.id) ? true : false;
+								    		}
+								    		return false;
+								    	}
+								    	@Override
+								    	public String toString() {
+								    		return "Student [name=" + name + ", id=" + id + "]";
+								    	}
+								    	
+								    }
+
+								    public class StudentTest {
+
+								    	public static void main(String[] args) {
+								    		
+								    		HashSet<Student> set = new HashSet<Student>();
+								    		set.add(new Student("100", "홍길동"));
+								    		set.add(new Student("200", "강감찬"));
+								    		set.add(new Student("300", "이순신"));
+								    		set.add(new Student("400", "정약용"));
+								    		set.add(new Student("500", "송중기"));
+								    		
+								    		System.out.println(set); // [Student [name=홍길동, id=100], Student [name=정약용, id=400], Student [name=강감찬, id=200],
+								    		                         //Student [name=송중기, id=500], Student [name=이순신, id=300]]
+								    	}
+
+								    }						    
+								    
+								    
+								    
+								 // 싱글톤 패턴 무조건1개만있다
+									
+
+								    public class Company {
+								    	
+								    	private static Company instance = new Company(); //코드가 처음 실행될때, 회사를 1개 만든다
+								    	private Company() {}
+								    	public static Company getInstance() {
+								    		if (instance == null) { //만들어진 회사가 없으면
+								    			instance = new Company(); //새로운회사
+								    		}
+								    		return instance;//아까 처음 만든회사
+								    	}
+								    	public static void main(String[] args) {
+								    		
+								    		Company com1 = Company.getInstance(); //만들어진 회사가 없으면 새로운회사
+								    		Company com2 = Company.getInstance(); //만들어진 회사가 없으면 새로운회사
+								    		System.out.println(com1 == com2); // true
+								    	}
+
+								    }						    
+								    
+								    
+								    
+								    
+	
+								    
+								    
+								    class Car {
+								    	String name;
+								    	public Car() {}
+								    	public Car(String name) {
+								    		this.name = name;
+								    	}
+								    }
+								    	
+								    class CarFactory{
+								    	private static CarFactory instance = new CarFactory();
+								    	HashMap<String, Car> carMap = new HashMap<>();
+								    	private CarFactory() {}
+								    	public static CarFactory getInstance() {
+								    		if (instance == null)instance = new CarFactory();
+								    		return instance;
+								    	}
+								    	public Car createCar(String name) {
+								    		if (carMap.containsKey(name)) {
+								    			return carMap.get(name);
+								    		}
+								    		Car car = new Car();
+								    		carMap.put(name, car);
+								    		return car;
+								    		
+								    	}
+								    }
+								    public class Company {
+		//싱글톤패턴, HashMap 이용						    	
+								    	private static Company instance = new Company();
+								    	private Company() {}
+								    	public static Company getInstance() {
+								    		if (instance == null) {
+								    			instance = new Company();// instance생성 안되어있으면 새로운 Company객체생성
+								    		}
+								    		return instance;//instance가 이미 생성된 상태라면, new Company()는 실행되지 않고, 
+								    		                 //기존의 Company 객체가 그대로 반환됩니다.
+								    	}
+								    	public static void main(String[] args) {
+								    		
+								    		Company com1 = Company.getInstance();
+								    		Company com2 = Company.getInstance();
+								    		System.out.println(com1 == com2); // true
+								    		
+								    		CarFactory factory = CarFactory.getInstance();
+								    		Car sonata1 = factory.createCar("연수 차");
+								    		Car sonata2 = factory.createCar("연수 차");
+								    		System.out.println(sonata1 == sonata2); // true로 나와야한다.
+								    		
+								    		Car avante1 = factory.createCar("승연 차");
+								    		Car avante2 = factory.createCar("승연 차");
+								    		System.out.println(avante1==avante2); //true로 나와야한다.
+								    		
+								    		System.out.println(sonata1==avante1);//false로 나와야한다.
+								    	
+								    	
+								    	
+								    	
+								    
+								    
+								    
+								    
+								    
+								    
+					}
+					
+					
+				}
+					
+					
 
 
 

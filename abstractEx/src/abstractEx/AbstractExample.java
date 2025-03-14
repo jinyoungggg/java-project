@@ -1,112 +1,150 @@
 package abstractEx;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-//public 어디서든 접근가능
-//private 같은 클래스 내부에서만 접근가능
-// protected 같은 패키지 안에 있는 자바파일들 또는 상속받는 클래스 관계
-class Calculator {
-	int value=0;
-	Calculator(){
-		this.value = 0;
-	}
-	void add(int val) {
-		this.value += val;
-	}
-	int getValue() {
-		return this.value;
-	}
-	public boolean isOdd(int i) {
-		return i % 2 == 1 ? true : false;
-	}
-	//메소드 오버로딩
-	public int avg(int[] data) {
-		int total = 0;
-		for (int i = 0; i < data.length; i++) {
-			total += data[i];
-		}
-		return total / data.length;
-	}
-	public int avg(ArrayList<Integer> data) {
+	/* Buyer 클래스 : money, 
+ * cart(배열)  
+ * 메서드: buy(구입),add(장바구니추가),summary(구입한물건목록,사용금액,남은금액)
+		Product 클래스 어레이선언 초기화: price
+		상속받는 클래스 Tv(100), Computer(200), Audio(50)
 		
-		int total = 0;
-		for(int item : data) {
-			total += item;
-		}
-			
-		return total / data.size();
+	메서드명 : buy
+	기능: 물건구입, 가진 돈에서 물건값을 빼고 장바구니에 담는다. 만약
+		     가진돈이 물건의 가격보다 적으면 바로 종료한다.
+        반환타입 : x
+	 파라미터 : Product(구입할물건) 
+
+    메서드명: add
+
+		 기능: 지정된 물건(a)을 장바구니(cart)에 담는다.(.add)
+
+		 반환타입 : x
+		 파라미터 : Product
+		 
+		 메서드명 : summary
+		 기능 : 구입한 물건의 목록(cart)과 사용금액(p.price), 남은금액(money) 출력
+		 반환타입: x
+		 파라미터: x    */
+
+
+class Buyer {
+	int money = 1000;
+	int price;
+	
+	
+	
+	ArrayList<Product> cart = new ArrayList<>();
+	
+	Buyer (int price){
+		System.out.println("cart"+ cart);
 	}
+	
+
+	
+void buy(Product p) {//파라미터 : Product(구입할물건)
+	if(money < p.price) { //만약   가진돈이 물건의 가격보다 적으면 
+		System.out.println("잔액부족해서 "+p+"를 못샀다");
+		
+		return; //바로 종료한다.
+		
+	} 
+	money = money - p.price; //가진 돈에서 물건값을 빼고
+	cart.add(p); //장바구니에 담는다. 
+	
+}
+void add(Product a) {
+	cart.add(a);
+}
+
+void summary() {
+	//for(~;~;~) (평소
+	//목록같은거를 자동으로 반복하게 하려면
+	// for( 목록에들어간내용 변수명 : 목록이름)  <이러면 목록에 들어가있는 개수만큼 알아서 반복
+	for(Product p : cart) {
+		System.out.print(p+"사용한 금액은:");
+		System.out.println(p.price);
+		
+		
+		
+		
+	}
+	System.out.println("남은 돈은:" + money);
+}
+
+
+}
+class Product {
+int price;
+Product(int price){
+this.price = price;
+
+}
+
+}
+
+
+class Tv extends Product{
+Tv(){
+super(100);//파라미터없으면 디폴트메서드생성 파라미터 있으면 부모클래스 파라미터호출
+}
+@Override
+public String toString() {
+return "TV";
+}
+}
+class Computer extends Product{
+Computer(){
+super(200);
+}
+@Override
+public String toString() {
+return "Computer";
+}
+}
+class Audio extends Product{
+Audio(){
+super(50);
+}
+@Override
+public String toString() {
+return "Audio";
+}
 }
 
 
 
 
-class MaxListCalculator extends Calculator{
-
-	@Override
-	int getValue() {
-		
-		return this.value > 100 ? 100 : this.value;
-	}
 
 
-}
+
+
+
 public class AbstractExample {
-	public static void main(String[] args) {
+public static void main(String[] args) {
+
+
+Buyer a = new Buyer(1000);
+a.buy(new Tv());
+a.buy(new Computer());
+a.buy(new Audio());
+a.buy(new Computer());
+a.buy(new Computer());
+a.buy(new Computer());
+a.buy(new Computer());
+a.summary();
+
+
 	
-	
-		Calculator cal = new Calculator();
-		cal.add(10);
-		System.out.println(cal.getValue());
-		
-		System.out.println(cal.isOdd(3));//3 홀수 : true
-		System.out.println(cal.isOdd(4));// 4 짝수 : false
-		
-		//배열로 받는 파라미터의 평균을 정수 리턴
-		
-		
-		int[] data1 = {1,3,5,7,9};
-		int result1 = cal.avg(data1);
-		System.out.println(result1);
-		
-		ArrayList<Integer> data2 = new ArrayList<>(Arrays.asList(1,3,5,7,9));
-		int result2 = cal.avg(data2);
-		System.out.println(result2);
-		
-		
-		
-		//1. UpgradeCalculator클래스를 만들고
-		// 값을 뺄 수 있는 minus 메서드를 추가하자.
-		UpgradeCalculator ucal = new UpgradeCalculator();
-		
-		ucal.add(10);
-		ucal.minus(3);
-		System.out.println(ucal.getValue()); //7
-		
-		
-		
-	//객체 비교	
-		ArrayList<Integer> a = new ArrayList<Integer>(Arrays.asList(1,2,3));
-		ArrayList<Integer> b = a;
-		
-		
-		
-		
-		a.add(4);
-		
-		
-		System.out.println(b == a); //true
-		
-		
-		
-	}
+
+
+
+
+
+
+
+
 }
-	
-	
 
-
-
+}
 
 
 
