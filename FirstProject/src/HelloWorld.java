@@ -2237,91 +2237,15 @@ class Cry{
  import java.lang.reflect.Array;
  import java.util.ArrayList;
  import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
- public class ArrayList {
+import vo.Book;
+import vo.Material;
 
- 	public static void main(String[] args) {
- 		
- 		String[] str = new String[3];// 개수
- 		str[0] = "1";
- 		str[1] = "2";
- 		str[2] = "3";		
- 		
- 		// Arrays.asList => 이미 존재하는 문자열을 ArrayList로 만든다.
- 		ArrayList<String> strList = new ArrayList<>(Arrays.asList(str));
- 	    System.out.println(strList);
-
- 		// "1,2,3,"
-         
- 	    String result = "";
- 	    
- 	    //[1, 2, 3]
- 	    
- 	    
- 	    for(int i = 0; i < strList.size(); i++) {
- 	    	
- 	    	result += strList.get(i);
- 	    	result += ",";
- 	    	}
- 	    result = result.substring(0, result.length()-1); 
-         
- 	    System.out.println(result );// 1,2,3
- 		
- 	    
- 	 //이것을 join으로 간단하게   =>
- 	    
- 	   String[] str = new String[3];// 개수
-		str[0] = "1";
-		str[1] = "2";
-		str[2] = "3";		
-		
-		// Arrays.asList => 이미 존재하는 문자열을 ArrayList로 만든다.
-		ArrayList<String> strList = new ArrayList<>(Arrays.asList("1","2","3"));
-		String result = String.join(",", strList);
-		
-		System.out.println(result); // 1,2,3
- 		
- 		
- 		
- 		
- 		
- 		
-		package main;
-
-		import vo.Book;
-
-		public class BookMain {
-
-			public static void main(String[] args) {
-				// 1번째 방법
-				Book book = new Book();
-				book.setBookName(" 태백산맥");
-				book.setAuthor(" 조정래");
-				book.setPrice(12000);
-				book.setId(1);
-				
-				System.out.println(book.toString());//Book클라스에 tostring 안해주면 book메소드주소나옴
-				
-				// 2번째 방법
-				Book book2 = new Book(2, "데미안", "헤르만 헤세", 13000);
-				System.out.println(book2.toString());
-			
-			
-			
-			
-			
-			
-			}
-			
-			
-	// 연습문제 
-	 //Book [id=1, bookName= 태백산맥, author= 조정래, price=12000]
-	 //Book [id=2, bookName=데미안, author=헤르만 헤세, price=13000]
-		
- 		//메인클라스 BookMain
-			package main;
-
-			import java.util.ArrayList;
+import java.util.ArrayList;
 
 			import vo.Book;
 
@@ -2702,6 +2626,10 @@ import abstractEx.Computer;
 import abstractEx.MaxListCalculator;
 import abstractEx.NoteBook;
 import abstractEx.UpgradeCalculator;
+import main.Car;
+import main.CarFactory;
+import main.Company;
+import main.Person;
 import utill.DateTimeUtill;
 								import vo.Book;
 
@@ -3612,6 +3540,580 @@ System.out.println(match);// 문자열이 주어진 정규식과 일치하는지
 				남은 돈은:50
 
 				      */
+<<<<<<< HEAD
+						
+						
+						
+						
+						
+						
+	//11일차
+						
+		//초보자가 많이하는실수
+			//wrapper , primitive type 차이구별
+					//primitive type
+						//int, double, float, boolean, char 등등
+						//값 자체를 메모리(stack)에 직접 저장
+						
+					
+						int a= 10;
+						int b = a;
+						b = 20;
+						System.out.println(a);//10
+						
+			    //wrapper class, reference type
+						//String, Integer, Boolean, Double, Float, ArrayList 등등
+						//boolean true, false
+						// Boolean true, false, null
+						//wrapper클래스는 메모리(Heap)에 저장되고, 메모리(Stack)는 참조(주소)만 저장된다.
+						//Integer는 참조타입인데 불변 객체라서 y = 200을 대입하면
+						//새로운 객체를 생성하고 y에 값을 할당
+						//따라서 x값은 그대로 남았다.
+						
+						//int z = null; // wrapper 클래스 써야 null;쓸수있다.
+						Integer z = null;
+						String zz = null;
+						
+						Integer x = 100;
+						Integer y = x;
+						y = 200;
+						System.out.println(x);//100
+						
+						
+				//배열 또는 ArrayList
+						int[]arr1 = {1, 2, 3};
+						int[]arr2 = arr1;
+						arr2[0] = 100;
+						System.out.println(arr1[0]); //100
+						// 100나오는 이유: 배열은 참조타입 그래서 arr1과 arr2가 같은 배열을 가르킴
+						// arr2의 값을 바꾸면 arr1의 값도 바뀐다.
+						int[] arr3 = arr1.clone();		//복사
+						arr3[0] = 100;
+						System.out.println(arr1[0]);
+						
+							
+			 // ==와 .equals()
+						// 기본타입은 ==로 비교
+						int a = 0;
+						int b = 0;
+						System.out.println(a == b);
+						
+						Integer c = new Integer(100);
+						Integer d = new Integer(100);
+						System.out.println(c == d); // false 메모리주소비교
+						System.out.println(c.equals(d)); // true	
+						
+						
+						
+
+				// 자동 형변환과 강제 형변환
+					// 자동 형변환
+						// 자료형이 작은타입에서 큰타입으로 바꿀때는 자동 형변환
+						// 큰 타입에서 작은 타입으로 바꿀때는 캐스팅 필요
+						int num = 10;
+						double d = num;
+						System.out.println(d); //10.0
+						
+						double d2 = 10.55;
+						int num2 = (int)d2;
+						System.out.println(num2); // 10
+						
+						// int / int =>> (double) 앞에붙혀줘야함
+						int a = 5;
+						int b = 2;
+						System.out.println((double)a/b);//2.5
+						
+						// int 범위를 벗어나는 변수값
+						// 214783648
+						//int max = 12345678900;
+						// 범위를 벗어나면 long을 사용하자
+						long max2 = 12345678900L;
+						
+						
+			// 객체 초기값 누락 null point exception  (NPE)
+//						String str;
+//						System.out.println(str.length());
+						
+				//대입연산자와 비교연산자 혼동
+						boolean result = true;
+						if(result == true) 
+							System.out.println(true);// =, == 헷갈 ㄴ
+								
+						// ArrayList와 for each
+						ArrayList<String> list = new ArrayList<String>(Arrays.asList("1","2","3"));
+						for ( String s : list ) {
+							if (s.equals("2")) s= "100"; //[1, 2, 3]  ArrayList에선 이렇게함안됨 밑에 루프문으로
+							}
+							for (int i = 0; i < list.size(); i++) {
+								if(list.get(i).equals("2")) {
+									list.set(i, "100");
+								}
+							}
+							System.out.println(list); // [1, 100, 3]		
+						
+						
+						
+						
+							class Person{
+								String name;
+								
+								Person(){
+									this(); // 생성자가 없을때 this 쓰면 호출할게없으니 오류뜸
+								}
+							}			
+						
+						
+						
+						
+						
+						
+							public class exam{
+								// static 변수  메모리 엑세스 속도 빠르다
+								static int staticVar = 0;
+								//final 상수 재정의못함(걍한번에구분하려고변수언더스코어로 씀)
+								static final int STATIC_FINAL_VAR = 0;
+								
+								
+								
+								public static void main(String[] args) {
+									
+									// static 변수 접근 시간 측정
+									long startTime = System.nanoTime();
+									for (int i = 0; i < 1000000000; i++) {
+										staticVar = staticVar  + 1; // static 변수에 접근
+										
+										
+										
+									}
+									long endTime = System.nanoTime();
+									long staticTime = endTime = startTime;
+									
+									//static final 변수 접근 시간 측정
+								    startTime = System.nanoTime();
+								    for (int i = 0; i < 1000000000; i++) {
+										int temp = STATIC_FINAL_VAR; 
+								    }
+									
+								    endTime = System.nanoTime();
+								    long staticFinalTime = endTime = startTime;
+								    
+								    System.out.println("Static 속도 :"+ staticTime + "ns"  );
+								    System.out.println("Static final 속도 :"+ staticFinalTime + "ns"  );
+									//static final이 더빠르다
+												
+						
+						
+						
+						
+						
+	// 제네릭
+								    
+								    
+		   package main;
+
+		 import java.util.ArrayList;
+         import vo.Plastic;
+	     import vo.Powder;
+		 import vo.ThreeDPrinter;
+
+								    public class Main {
+
+								    	public static void main(String[] args) {
+								    		
+//								    		ThreeDPrinter p1 = new ThreeDPrinter();
+//								    		Powder p = new Powder();
+//								    		p1.setMaterial(p);
+//								    		
+//								    		powder pp = p1.getMaterial();
+//								    		
+								    		ThreeDPrinter<Powder> p1 = new ThreeDPrinter();
+								    		Powder p = new Powder();
+								    		p1.setMaterial(p);
+								    		Powder pp = p1.getMaterial();
+								    		
+								    		ThreeDPrinter<Plastic> p2 = new ThreeDPrinter();
+								    		Plastic ps = new Plastic();
+								    		p2.setMaterial(ps);
+								    		Plastic pss = p2.getMaterial();//다운캐스팅할필요없이 바로 형변환
+								    		
+								    		
+								    		
+								    		
+								    		
+								    }
+
+								    }
+								    
+								    package vo;
+
+								    public class ThreeDPrinter<T extends Material> {
+								    	
+								    	private T material;
+
+								    	public T getMaterial() {
+								    		return material;
+								    	}
+
+								    	public void setMaterial(T material) {
+								    		this.material = material;
+								    	}
+								    	
+
+								    }
+				    
+								    package vo;
+
+								    public class Powder extends Material {
+								    	public void doPrint() {
+								    		System.out.println("Powder 재료로 출력");
+								    	}
+
+								    	@Override
+								    	public String toString() {
+								    		return "재료는 Powder입니다";
+								    	}
+								    	
+								    }
+								    
+								    package vo;
+
+								    public class Plastic extends Material {
+								    	public void doPrint() {
+								    		System.out.println("Plastic 재료로 출력");
+								    	}
+
+								    	@Override
+								    	public String toString() {
+								    		return "재료는 Plastic입니다";
+								    	}
+								    }
+				    
+								    
+								    
+								    package vo;
+
+								    public abstract class Material {
+
+								    }
+		    
+								    
+		//12일차
+								    
+								    class Person {
+								    	String name;
+								    	String birth;
+								    	int age;
+								    	public int getAge() {
+								    		return age;
+								    	}
+								    	public void setAge(int age) {
+								    		this.age = age;
+								    	}
+								    	public String getName() {
+								    		return name;
+								    	}
+								    	public void setName(String name) {
+								    		this.name = name;
+								    	}
+								    	public String getBirth() {
+								    		return birth;
+								    	}
+								    	public void setBirth(String birth) {
+								    		this.birth = birth;
+								    	}
+								    	
+								    	// getter, setter, constructor
+								    }
+
+								    public class Mainn {
+
+								    	public static void main(String[] args) {
+								    		// 컬렉션 프레임 워크
+								    		// 자바에서 데이터를 저장하고 관리하는 방법을 제공하는 클래스, 인터페이스의 집합
+								    		// 여러개의 데이터를 효율적으로 다루기 위한 도구
+								    		//핵심
+								    		// 데이터구조 : 데이터를 어떻게 저장하고 접근할건가의 구조 정의
+								    		// 효율적관리 : 데이터를 쉽게 추가, 삭제, 변경, 순회하는 작업을 효율적으로 할 수 있게 해준다.
+								    		
+								    		// 컬렉션 프레임워크 : 컬렉션, 맴 두가지로 나뉜다.
+								    		// 1. 컬렉션 : 여러 개의 데이터를 하나의 객체로 다루는 방법을 제공
+								    		// 2. 맵 : 키와 값 쌍으로 이루어진 데이터 구조이고 중복되지 않는 키를 사용해서 값을 찾을 수 있다.
+								    		
+								    		String [] nums = new String[] {"333", "123", "256"};
+								    		List<String> numsList = new ArrayList<String>(Arrays.asList("333", "123", "256"));
+								    		numsList.sort(Comparator.naturalOrder()); // naturalOrder 오름차순해주는 자동메서드 [123, 256, 333]
+								    		System.out.println(numsList);
+								    		numsList.sort(Comparator.reverseOrder());
+								    		System.out.println(numsList);//reverseOrder 내림차순해주는 자동메서드 [333, 256, 123]
+								    		
+								    		// add 컬렉션에 데이터를 추가한다.
+								    		numsList.add("444");
+								    		System.out.println(numsList); //[333, 256, 123, 444]
+								    		numsList.remove("444"); // remove
+								    		numsList.remove(0); 
+								    		System.out.println(numsList);  // [256, 123]
+								    		
+								    		// size()
+								    		System.out.println(numsList.size()); //4
+								    		
+								    		//clear()
+								    		numsList.clear();
+								    	    System.out.println(numsList); //[]
+								    	    
+								    	    //Iterator
+								    	    
+								    	    //맵 : 사전과 비슷하다.
+								    	    // people : 사람, baseball : 야구
+								    	    // name : 최종선, birth : 20000101
+								    	    //   key        :   value
+								    	    // key와 value가 쌍으로 이루어 진걸 맵이라고 한다.
+								    	    // Map : HashMap, LinkedHashMap, TreeMap 등등
+								    	    // VO
+								    	    Person person = new Person();
+								    	    person.setName("최종선");
+								    	    person.setBirth("20000101");
+								    	    person.setAge(10);
+								    	    String name = person.getName();
+								    	    String birth = person.getBirth();
+								    	    int age = person.getAge();
+								    	    List<Person> personList = new ArrayList<>();
+								    	    personList.add(person);
+								    	    
+								    //HashMap사용법	   
+								    	    HashMap<String, Object> hashMap = new HashMap<>();
+								    	    hashMap.put("name", "최종선");
+								    	    hashMap.put("birth", "20000101");
+								    	    hashMap.put("age", 10); //저위에 Object로 해놔서 숫자 넣을수있음
+								    	    String name2 = (String) hashMap.get("name");
+								    	    String birth2 = (String) hashMap.get("birth");
+								    	    int age2 = (int) hashMap.get("age");
+								    	    // containsKey : 맵에 해당 key가 있는지 true, false로 리턴
+								    		   System.out.println(hashMap.containsKey("birth")); // true
+								    		  // remove : 맵의 항목을 삭제한다. 해당 key로 항목을 삭제 후 value를 리턴
+								    		   System.out.println(hashMap.remove("name"));//최종선
+//								    		   System.out.println(hashMap.toString()); //{birth=20000101, age=10} 이름지워짐 ㅇㅇ
+								    		
+								    		   System.out.println(hashMap.size());
+								    		    System.out.println(hashMap.keySet()); 
+								    		    List<String> KeyList = new ArrayList<>(hashMap.keySet());
+								    		    
+
+								    		   
+								    	   List<HashMap<String, Object>> hashMapList = new ArrayList<>();	
+								    	   hashMapList.add(hashMap);
+								    	
+					//중요			    	   //Map >>> HashMap, LinkdeHashMap, TreeMap
+								    	   // LinkdeHashMap : 입력된 순서대로 데이터를 저장
+								    	   // TreeMap : 입력된 Key의 오름차순으로 데이터를 저장
+								    	   
+								    	   
+								    	
+								    	 //집합 : 중복 허용 불가, 순서가 없다
+								   		//HashMap, LinkedHashMap,  TreeMap
+								   		// 집합자료형 : 집합과 관련된 것을 쉽게 처리하기 위해 만들었다.
+								   		// HashSet, LinkedHashSet, TreeSet
+								   		
+								   		HashSet<String> set = new HashSet<>(Arrays.asList("H", "e", "l", "l", "o"));
+//								   		System.out.println(set);
+								   		
+								   		
+								   		
+								   		
+								   		// 교집합구하기 : retainAll
+								   		// HashSet 하나 더 생성 >>> new 연산자의 파라미터를 s1넣는다.
+								   		// retainAll 메서드의 파라미터를 s2 넣는다
+								   		//로그에찍는다
+								   		
+								   		
+								   		
+								   		
+								   		HashSet<Integer> s1 = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
+								   		HashSet<Integer> s2 = new HashSet<>(Arrays.asList(4,5,6,7,8,9));
+								   		
+								   		 HashSet<Integer> 교집합세트 = new HashSet<>(s1);
+								    	    교집합세트.retainAll(s2);
+								   		System.out.println(교집합세트); //[4, 5, 6]
+								   		
+								   		//합집합구하기 : addAll
+								   		
+								   		 HashSet<Integer> 합집합세트 = new HashSet<>(s1);
+								   		 합집합세트.addAll(s2);
+								   		 System.out.println(합집합세트); //[1, 2, 3, 4, 5, 6, 7, 8, 9]
+								   		 
+								   		//차집합구하기 : removeAll
+								   		 HashSet<Integer> 차집합세트 = new HashSet<>(s1);
+								   		 차집합세트.removeAll(s2);
+								   		 System.out.println(차집합세트); // [1, 2, 3]
+								   	
+								   		 // add, addAll, remove
+								   		 차집합세트.add(100);
+								   		 차집합세트.addAll(Arrays.asList(55,66,77));
+								   		 차집합세트.remove(55);
+								   		 
+								   		 
+								   		// HashMap, List
+								   		 // LinkdeHashMap : 입력된 순서데로 데이터 저장
+								   		 // TreeMap : 입력한 key의 오름차순 데이터 저장			    	
+								    	
+								    	
+								    	
+								    	
+								    	}
+
+								    }
+				   
+								    
+								    
+								    
+								    
+								    
+								    
+								    package main;
+
+								    import java.util.HashSet;
+
+								    class Student {
+								    	String name;
+								    	String id;
+								    	public Student(String id, String name) {
+								    		this.id = id;
+								    		this.name = name;
+								    	}
+								    	
+								    	나랑 쟤랑 같은지 검사해줘
+								    	나(학생) 쟤(??)
+								    	나(학생) 쟤(학생) 이면 둘이 같은건지 검사
+								    	나(학생) 쟤(학생은아닐때) 그럼 무조건 다른거니까 하지마
+								    	나(학생) 쟤(학생)
+								    	쟤(사람)
+								    	나(학생) 쟤( (학생)사람 )
+								    	
+								    	public boolean equals(Object obj) {
+								    		if (obj instanceof Student) {
+								    			Student s = (Student) obj;
+								    			return (this.id == s.id) ? true : false;
+								    		}
+								    		return false;
+								    	}
+								    	@Override
+								    	public String toString() {
+								    		return "Student [name=" + name + ", id=" + id + "]";
+								    	}
+								    	
+								    }
+
+								    public class StudentTest {
+
+								    	public static void main(String[] args) {
+								    		
+								    		HashSet<Student> set = new HashSet<Student>();
+								    		set.add(new Student("100", "홍길동"));
+								    		set.add(new Student("200", "강감찬"));
+								    		set.add(new Student("300", "이순신"));
+								    		set.add(new Student("400", "정약용"));
+								    		set.add(new Student("500", "송중기"));
+								    		
+								    		System.out.println(set); // [Student [name=홍길동, id=100], Student [name=정약용, id=400], Student [name=강감찬, id=200],
+								    		                         //Student [name=송중기, id=500], Student [name=이순신, id=300]]
+								    	}
+
+								    }						    
+								    
+								    
+								    
+								 // 싱글톤 패턴 무조건1개만있다
+									
+
+								    public class Company {
+								    	
+								    	private static Company instance = new Company(); //코드가 처음 실행될때, 회사를 1개 만든다
+								    	private Company() {}
+								    	public static Company getInstance() {
+								    		if (instance == null) { //만들어진 회사가 없으면
+								    			instance = new Company(); //새로운회사
+								    		}
+								    		return instance;//아까 처음 만든회사
+								    	}
+								    	public static void main(String[] args) {
+								    		
+								    		Company com1 = Company.getInstance(); //만들어진 회사가 없으면 새로운회사
+								    		Company com2 = Company.getInstance(); //만들어진 회사가 없으면 새로운회사
+								    		System.out.println(com1 == com2); // true
+								    	}
+
+								    }						    
+								    
+								    
+								    
+								    
+	
+								    
+								    
+								    class Car {
+								    	String name;
+								    	public Car() {}
+								    	public Car(String name) {
+								    		this.name = name;
+								    	}
+								    }
+								    	
+								    class CarFactory{
+								    	private static CarFactory instance = new CarFactory();
+								    	HashMap<String, Car> carMap = new HashMap<>();
+								    	private CarFactory() {}
+								    	public static CarFactory getInstance() {
+								    		if (instance == null)instance = new CarFactory();
+								    		return instance;
+								    	}
+								    	public Car createCar(String name) {
+								    		if (carMap.containsKey(name)) {
+								    			return carMap.get(name);
+								    		}
+								    		Car car = new Car();
+								    		carMap.put(name, car);
+								    		return car;
+								    		
+								    	}
+								    }
+								    public class Company {
+		//싱글톤패턴, HashMap 이용						    	
+								    	private static Company instance = new Company();
+								    	private Company() {}
+								    	public static Company getInstance() {
+								    		if (instance == null) {
+								    			instance = new Company();// instance생성 안되어있으면 새로운 Company객체생성
+								    		}
+								    		return instance;//instance가 이미 생성된 상태라면, new Company()는 실행되지 않고, 
+								    		                 //기존의 Company 객체가 그대로 반환됩니다.
+								    	}
+								    	public static void main(String[] args) {
+								    		
+								    		Company com1 = Company.getInstance();
+								    		Company com2 = Company.getInstance();
+								    		System.out.println(com1 == com2); // true
+								    		
+								    		CarFactory factory = CarFactory.getInstance();
+								    		Car sonata1 = factory.createCar("연수 차");
+								    		Car sonata2 = factory.createCar("연수 차");
+								    		System.out.println(sonata1 == sonata2); // true로 나와야한다.
+								    		
+								    		Car avante1 = factory.createCar("승연 차");
+								    		Car avante2 = factory.createCar("승연 차");
+								    		System.out.println(avante1==avante2); //true로 나와야한다.
+								    		
+								    		System.out.println(sonata1==avante1);//false로 나와야한다.
+								    	
+								    	
+								    	
+								    	
+								    
+								    
+								    
+								    
+								    
+								    
+=======
+>>>>>>> origin/main
 					}
 					
 					
