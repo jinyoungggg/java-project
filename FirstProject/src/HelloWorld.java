@@ -2174,73 +2174,32 @@ class Cry{
 //일반 List와 ArrayList 차이
  
  import java.util.ArrayList;
-
- public class ArrayExample {
-
- 	public static void main(String[] args) {
- 		
- 		String[] strs = new String[3];// 개수
- 	    strs[0] = "1";
- 	    strs[1] = "333";
- 		strs[2] = "4567";		
- 		System.out.println(strs[1]);
- 		System.out.println(strs.length);
- 		boolean isExist = false;
- 		
- 		for(int i = 0; i < strs.length; i++) {
- 			if (strs[i].equals("4567")) {
- 				isExist = true;
- 			}
- 		}
- 		
- 		
- 		
- 		
- 		
- 		
- 		// ArrayList : 배열은 크기가 정해져 있는데,
- 		// 리스트 크기가 변한다.
- 		// <> : 제네릭 꺾쇠 안에 리스트의 자료형이 뭔지 표기한다.
-  		ArrayList<String> numbers = new ArrayList<>();//뒤쪽 제네릭은 써도되고안써도됨.
- 		numbers.add("1");
- 		numbers.add("333");
- 		numbers.add("4567");
- 		
- 		String n1 = numbers.get(0);//위에 제네릭 String 안해주면 오류뜸
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		// get : 메서드 파라미터로 받는 index 번호의 값을 반환한다.
- 		System.out.println(numbers.get(1));
- 		//ArrayList에선 length 대신 size메서드가 배열의 길이 값을 반환한다
- 		System.out.println(numbers.size());
- 		//contains 리스트에서 해당 항복이 있는지 체크
- 		System.out.println(numbers.contains("4567"));
- 		//remove >> 2가지
- 		// remove(객체) : true, false
- 		// remove(인덱스번호) : 삭제한 인덱스의 다음 인덱스 값이 출력된다.
- 		System.out.println(numbers.remove("1")); // true (index)
- 		System.out.println(numbers.remove(1)); // 4567 (Object)
- 		
- 	}
-
- }
-
-
-//연문 ??? 복습 필수
- 
- import java.lang.reflect.Array;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
  import java.util.ArrayList;
  import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import vo.Book;
 import vo.Material;
@@ -2620,16 +2579,29 @@ import java.util.ArrayList;
 								import java.time.format.DateTimeFormatter;
 								import java.util.ArrayList;
 								import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import Baekjoon.Sample;
 import abstractEx.Calculator;
 import abstractEx.Computer;
 import abstractEx.MaxListCalculator;
 import abstractEx.NoteBook;
 import abstractEx.UpgradeCalculator;
+import calc.SwingEx;
 import main.Car;
 import main.CarFactory;
 import main.Company;
 import main.Person;
+import main.Student;
+import util.Calc;
 import utill.DateTimeUtill;
 								import vo.Book;
 
@@ -3714,7 +3686,8 @@ System.out.println(match);// 문자열이 주어진 정규식과 일치하는지
 		 import java.util.ArrayList;
          import vo.Plastic;
 	     import vo.Powder;
-		 import vo.ThreeDPrinter;
+import vo.StudentVO;
+import vo.ThreeDPrinter;
 
 								    public class Main {
 
@@ -4120,6 +4093,99 @@ System.out.println(match);// 문자열이 주어진 정규식과 일치하는지
 				}
 					
 					
+13일차 Iterator
+//지환님 총정리
+
+class Student{
+	String name;
+	int score;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public Student(String name, int score) {
+		super();
+		this.name = name;
+		this.score = score;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", score=" + score + "]";
+	}
+	
+	
+}
+
+/*
+ * 클래스 파일이름  (여기서는 Ex.java니까 class이름도 Ex이어야함 무조건){
+ * 	그 안에있는
+ * 	public static void main(String args[]){
+ * 				계산기 a=new 계산기(); //이렇게 main(책상)을 깔끔하게 쓸수있음 + 내가만든계산기 코드를 나중에 또 쓸수있음
+ * 				a.더하기 
+ * 
+ * 
+ * }
+ * 컴퓨터는 java를 실행하면 이 main 안에 있는 내용만 실행함
+ * main 이 책상임.
+ * 공부할때 필요한거 다 책상에 올려놓으면 더러워지니까
+ * 막 옆에있는 서랍에도 넣고 가방에도 넣어야함 
+ * 그게 밖에있는 class
+ * 
+ * class 계산기{
+ * 	int 값
+ * 	기능 더하기(){
+ * 
+ * 	}
+ * 
+ * }
+ * 이렇게 서랍에 정리해놓으면  <<44L
+ * 
+ * 애초에 왜 이렇게 하는지 알려면 프로그래밍언어가 2가지가 있는데
+ * 
+ * 1코드
+ * 2
+ * 3
+ * 4
+ *  코드를 위에서부터 1234로밖에 못읽는 절차지향 언어가 있고
+ *  
+ *  1
+ *  3
+ *  2
+ *  4
+ *  51
+ *  2
+ *  3
+ *  순서 상관없이 아무데서나 읽으면서 객체를 만들어 쓰는 객체지향 언어가 있음
+ *  
+ *  절차지향은 배우기 쉽고 프로그래밍 기초를 알기 좋음  (1990년대 2000년대 나온애들)
+ *  근데 객체지향은 코딩기초+객체가뭔지까지 알아야해서 처음에 배우기 어려움 <<왠만한 애들이 다 이거씀(최신
+ * 
+ * 메인{
+ * 
+ * }
+ * 
+ * 클래스 {
+ *   기능{}
+ * }
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * }
+ */
 
 
 
@@ -4129,11 +4195,1090 @@ System.out.println(match);// 문자열이 주어진 정규식과 일치하는지
 
 
 
+class EasyTest{
+	public void Easy() {
+		
+		//막 계산함
+		//막 연결함
+		//막 뭐함
+		System.out.println("계산완료");
+		
+	}
+	
+}
+public class Ex {
+
+	public static void removeLowScore(List<Student> students) {
+		Iterator<Student> iterator = students.iterator();
+		while(iterator.hasNext()) {
+			Student s = iterator.next();
+			
+			if (s.getScore() <= 50) iterator.remove();
+				
+			
+		}
+		
+	
+	}
+	public static void main(String args[]) {
+		ArrayList<StudentVO> list = new ArrayList<>();
+		list.add(new StudentVO("이지은", 2, 1, 70, 90, 70));
+		list.add(new StudentVO("적재", 2, 2, 60, 100, 80));
+		list.add(new StudentVO("최유리", 1, 3, 100, 100, 100));
+		list.add(new StudentVO("존박", 1, 1, 90, 70, 80));
+		list.add(new StudentVO("황소윤", 1, 2, 80, 80, 90));
+		//(String name, int ban, int no, int kor, int eng, int math)
+		
+		// 정렬 수행
+		Calc.calcRank(list);
+		
+		Iterator<StudentVO> iterator = list.iterator();
+		
+//		while(iterator.hasNext()) {
+//			//System.out.println("[Main출력]"+iterator.next());
+//		}
+		
+		/**
+		 * 아래는 콘솔 출력 결과
+		 * 최유리, 1, 3, 100,100, 100, 300, 100.0, 1
+		 * 황소윤, 1, 2, 80,80, 90, 250, 83.3, 2
+		 * 적재, 2, 2, 60,100, 80, 240, 80.0, 3
+		 * 존박, 1, 1, 90,70, 80, 240, 80.0, 3
+		 * 이지은, 2, 1, 70,90, 70, 230, 76.7, 5
+		 */
+		
+		// Iterator >>> for for each enhanced for while do while
+		// 반복문이다
+		// 컬렉션 객체에서 요소를 순차적으로 접근하고 제거하는 방법을 제공하는 인터페이스다.
+		// List, Set, Map => 컬렉션 클래스
+		// Iterator를 쓰면 컬렉션 내부 구조에 의존하지 않고도 요소를 순차적으로 탐색 가능
+		
+		//메서드
+		// hasNext() : 다음 요소가 있는지 확인 > true false
+		// next() : 컬렉션에서 다음 요소를 반환하고, 그 다음 요소로 이동한다.
+		//            NoSuchElementException
+		// remove() : 요소 삭제 ( next()로 반환한 요소를 컬렉션에서 제거)
+		
+		// 리스트 생성
+		List<String> strList = new ArrayList<>(Arrays.asList("Apple","Banana"));
+		
+		// Iterator 객체 생성
+		Iterator<String> iterator2 = strList.iterator();
+		
+		//Iterator 를 사용해서 요소 출력
+//		while(iterator2.hasNext()) {
+//			System.out.println(iterator2.next());
+//		}
+				
+		// 특징
+		/* 컬렉션변경 : Iterator 컬렉션을 순회하는 동안 안전하게 요소를 제거할 수 있다.
+		   next() => remove()로 제거
+		   for loop. Iterator 차이 : 순회 방식과 컬렉션을 변경할 때 안전성
+		   
+		
+		*/
+		
+	 //for(int i = 0; i < strList.size(); i++) {
+	//	 System.out.println(strList.get(i));
+	// }
+		
+	/*	for (String item : strList) {
+			System.out.println(item);
+			if(item.equals("Apple")) {
+				strList.remove(item);
+			}
+		}
+		 
+		while(iterator2.hasNext()) {
+			String item = iterator2.next();
+			
+			if (item.equals("Apple")) {
+				iterator2.remove();
+			}
+		}
+		System.out.println(strList);*/
+		
+		// for index기반, iterator index값 생성안해서 성능 더좋음
+		// for >>>> index를 사용해서 요소에 접근할 때 유용, 컬렉션 변경이 없을 때 유용
+		// iterator >>> 컬렉션을 순회하면서 안전하게 제거 또는 변경할 때 유용
+		
+		
+		//지금 구조
+		//클래스 메인 {  }
+		//클래스 Ex {  }
+
+		List<Student> students = new ArrayList<>();  //목록<들어갈내용:학생> 목록이름 = 만들어라 목록<>;
+		students.add(new Student("홍길동", 85));  //학생목록.추가해라( 학생(이름은홍길동점수는85)  )
+		//위 내용은 압축된 형태
+		//원래 학생 a = 새 학생
+		//학생목록.추가( 학생 a ) 하는데 이 두줄을 압축한게
+		//학생목록.추가(새 학생(생성자 요청사항)  )
+		
+		
+		students.add(new Student("홍길순", 40));
+		students.add(new Student("이순신", 60));
+		students.add(new Student("강감찬", 30));
+		students.add(new Student("전현무", 45));
+		
+		removeLowScore(students);// 불러주기  (클래스 Ex 에서 만든 메소드)
+		
+		for (Student item : students) {   //반복하세요(학생목록안에 있는 학생만큼 ==>  학생 (임시이름): 학생목록
+											//이러면 1번째 반복에서는 (임시이름).getName하면 홍길동이나오고 2번째는 이순신...
+											//이렇게 쓰기 위해서 (임시이름) 이 필요함 여기서는 item이라고 씀
+			
+			
+			System.out.println(item); //Student [name=홍길동, score=85]
+			                           //Student [name=이순신, score=60]
+
+		}
+		
+		
+		
+		//점수가 50 이하인 학생들을 삭제하는 메서드를 만들어서 호출
+		//removeLowScore
+//		List<Student> lst = new ArrayList<>(Arrays.
+//		for (Student item : students) {
+//			if( students <= 50)
+//			System.out.println(item);
+//		}
+	}
+	
+	*/iterator : 반복쉽게해주는거
+
+	Iterator<Student> iterator = students.iterator
+	//반복기 <내용의종류> 변수이름 = 목록이름.iterator
+	//<  > 안에는 목록 안에서 내가 빼오고 싶은 종류의 데이터
+	<숫자만>  <글자만> <학생만>  <사람만>
+
+	//이터레이터 목록 을 하면
+	//목록내용이 알아서 이터레이터 안으로 들어감.
+
+	//이터레이터.다음내용  (iterator.next)하면 알아서 다음내용으로감
+
+	//목록(1,2,3,4)면
+	//for문 쓸때는 막i=0;i<4;i++해야되는데
+	//그냥 이터레이터.목록  하고 이터레이터.다음 을 4번하면
+	 1234 나옴
 
 
 
+	while(iterator.hasNext()){  //반복기에 아직 반복할 내용이 남아있습니까
+		iterator.next():        //그럼 다음내용으로
+	}
+
+	for쓰는건 원하는 횟수만큼 무언가 해야 할때
+	iterator 쓰는건 목록같은 거 내용을 꺼낼때 */
+
+}
 
 
+
+public class Main {
+	
+	public static int add(int x, int y) {
+		return x + y;
+	}
+	
+	public static void main(String[] args) {
+		
+		Comparator<String> comparator = new Comparator<>() {
+			@Override
+			public int compare(String o1, String o2) {
+				
+				return o1.length() - o2.length();
+				
+			}
+		};
+		//람다식 변형하면
+		Comparator<String> c = (s1, s2) -> s1.length() - s2.length();
+		
+		List<String> list = new ArrayList<>(Arrays.asList("apple", "banana", "orange"));
+		list.stream().forEach(s-> System.out.println(s)); //  순차스트림 stream 
+		list.parallelStream().forEach(s-> System.out.println(s)); // 병렬스트림 parallelStream
+		
+		list.stream().filter(s -> {
+			System.out.println(s);
+			return s.startsWith("o");
+			
+		}).map(String::toUpperCase).limit(4).forEach(System.out::println);
+		
+		//람다식은 (요청사항)->요청사항가지고할내용;
+		//람다식 테스트하려면 막 내가 내 클래스 만들고 기능만들고 해야하는데
+		//그냥 딱 마침 저 람다식을 쓰면 작동하는 java 기본 클래스가 있어서 그냥 테스트용으로쓴거
+		//
+		
+		
+		
+   /*순차스트림apple
+			banana
+			orange 
+	병렬스트림	banana
+			orange
+			apple
+	람다식 apple
+		banana
+		orange
+		ORANGE*/ // 실행결과
+
+		//연습문제	
+		List<String> names = Arrays.asList("John", "Jane", "Jack", "Sara", "Jin");
+			//1. 이름이 J로 시작 하는것만 선택
+			//2.정렬
+			//3.대문자로변환
+			//4. 리스트로 수집
+			List<String> result = names.stream() 
+				.filter(x -> x.startsWith("j"))
+				.sorted()
+				.map(String::toUpperCase)
+				.collect(Collectors.toList());
+			
+			// 리스트에서 짝수만 필터링해서 출력 
+			List<Integer> nums =Arrays.asList(1,2,3,4,5,6,7,8,9,10);  
+			
+			
+			
+			List<Integer> nr = nums.stream()
+					.filter(n -> n % 2 == 0)
+					.collect(Collectors.toList());
+			
+			System.out.println(nr); //[2, 4, 6, 8, 10]
+			
+			// 람다스트림 핵심요약 3가지
+			// 1.Predicate : 조건검사
+			Predicate<Integer> isEven = n -> n % 2 == 0;
+			System.out.println(isEven.test(4)); // true
+			System.out.println(isEven.test(5)); // false
+			//2. Function : 변환 함수
+			Function<String, Integer> str = s -> s.length();
+			System.out.println(str.apply("hello")); // 5
+			// 3. Consumer : 값을 소비
+			Consumer<String> consumer = s -> System.out.println(s);
+			consumer.accept("hello world"); // hello world
+
+
+			public class Main {
+				
+				public static void main(String[] args) {
+					//연습문제	
+					List<String> names = Arrays.asList("John", "Jane", "Jack", "Sara", "Jin");
+						//1. 이름이 J로 시작 하는것만 선택
+						//2.정렬
+						//3.대문자로변환
+						//4. 리스트로 수집
+						
+					
+					// 익명클래스
+					Predicate<String> startsWithJ = new Predicate<String>() {
+						@Override
+						public boolean test(String t) {
+							return t.startsWith("J");
+						}
+					};
+					Comparator<String> naturalOlder = new Comparator<String>() {
+						
+						@Override
+						public int compare(String o1, String o2) {
+							
+							return o1.compareTo(o2);
+						}
+					};
+					Function<String, String> toUpperCase = new Function<String, String>() {
+						
+						@Override
+						public String apply(String t) {
+							
+							return t.toUpperCase();
+						}
+					};
+					List<String> result = names.stream()
+							.filter(startsWithJ)
+							.sorted(naturalOlder)
+							.map(toUpperCase)
+							.collect(Collectors.toList());
+					
+					System.out.println(result); //[JACK, JANE, JIN, JOHN]
+
+
+
+					// 예외 : 프로그램 실행중에 발생할 수 있는 예상하지 못한 오류 또는 문제
+					// ex : 0으로 나누기를 시도, 배열의 index범위를 초과하는걸 조회한다.
+					// 예외가 발생하면 프로그램이 중단된다. 따라서, 이를 처리하는 법을 배운다.
+					
+					int a = 5;
+					int b = 4;
+					
+					try {
+						//예외가 발생 할 수 있는 코드
+						System.out.println(a/b);
+					
+						// 예외 처리 코드
+						
+					} catch (ArithmeticException  | NullPointerException e) {
+						System.out.println("0으로 나눌 수 없습니다.");
+					} finally {
+						System.out.println("예외가 발생하던 말던 무조건 항상 실행되는 코드");
+					} //1 예외가 발생하던 말던 무조건 항상 실행되는 코드
+					
+					String str = null;
+					// str = ""; // 빈문자를 str에 대입
+					// str = null; // 선언만하고 초기값을 안넣어 아무것도 없는것
+					try {
+						System.out.println(str.length());
+					} catch (NullPointerException e) {
+						System.out.println("str은 null이다."); //str은 null이다.
+					}
+					
+					
+					int[] arr = new int[5];
+					
+					try {
+						for (int i = 0; i <= 5; i++) {
+						arr[i]= i;
+						System.out.println(arr[i]);
+						}
+						
+					
+					} catch(ArrayIndexOutOfBoundsException e) {
+						System.out.println("배열 번호 틀렸다."); //배열 번호 틀렸다.
+					}
+					
+					
+
+//14일차 
+					
+		//Optional : NullPointException 방지
+			// null 체크 : java 8이전에는 없다.
+			/ NullPointException NPE			
+			
+			public class test {
+
+
+						
+						public static Optional <String> getUserById(int id) {
+							return Optional.ofNullable(null);
+							
+							
+						}
+						
+						
+						public static void main(String[] args) throws IllegalAccessException {
+							
+							//Optional : NullPointException 방지
+							// null 체크 : java 8이전에는 없다.
+							// NullPointException NPE
+							Optional<String> user = getUserById(1111);
+							System.out.println(
+									      //클래스명 :: 메소드명
+									user.map(String::toUpperCase).orElse("이름이 없습니다.")
+									
+									
+									);
+							
+							//null이 아닌 값을 가지는 Optional 객체 생성
+							Optional<String> optional = Optional.of("hello");
+							// null일 수도 있는 Optional 객체 생성
+							Optional<String> optional2 = Optional.ofNullable(null);
+							//값이 비어 있는 Optional 객체 생성
+							Optional<String> optional3 = Optional.empty();
+							// Optional 객체가 값을 포함하고 있는지 확인하는 메서드
+							if (optional.isPresent()) {
+								System.out.println(optional.get());// 그냥 optional하면 optional hello출력됨 //hello
+								
+							}
+							// Optional 객체가 값을 포함하고 있을 때 특정한 작업 수행
+							optional.ifPresent(v -> System.out.println(v));//hello
+							// orElse >> Optinal 객체가 값을 포함하고 있으면 그 값을 반환하고
+							// 그렇지 않으면 기본 값을 반환한다.
+							String v = optional.orElse("기본값");
+							System.out.println(v); // optional1 : hello, 2: 기본값 ,3: 기본값
+							//orElseGet : Optional 객체가 값을 포함하고 있으면 그 값을 반환하고
+							// 그렇지 않으면 람다 표현식이나 메서드 참조를 통해 기본값을 반환한다.
+							v = optional2.orElseGet(() -> "기본값 2");
+							System.out.println(v);
+							// orElseThrow : Optinal 객체가 값을 포함하고 있으면 그 값을 반환하고 
+							// 그렇지 않으면 예외를 던진다.
+							v = optional2.orElseThrow(() -> new IllegalAccessException("오류"));
+							
+							
+							
+							
+							
+							String optional = "Hello";
+							//값이 존재하면 출력
+							if (optional != null) {
+								System.out.println(optional);
+								
+							}
+							
+							//뭔가 연산 후
+							if (optional != null) {
+								optional = optional.toUpperCase();
+							}
+							
+							// 뭔가 연산 후
+							if (optional != null) {
+								System.out.println(optional);
+							}
+							
+							//Optional 사용
+							Optional<String> optional2 = Optional.of("Hello");
+							optional2.ifPresent(System.out::println);
+							optional2.ifPresent(String::toUpperCase);
+							
+							String msg = optional2.orElseThrow(() -> new IllegalAccessException("값이 없다."));
+							System.out.println(msg);
+							
+							
+			
+							
+							
+							
+		// 예제
+					// 배열 길이값 안에 index 있는건지 체크
+					// 있을 때 또는 없을 때 리턴 어떻게 할건가					
+							public class test {
+								
+
+								public static Optional<String> getValueAtIndex(List<String> list, int index){
+									
+									
+									if (index >= 0 && index < list.size()) {
+										return Optional.ofNullable(list.get(index));
+									}
+									// 값이 없을 때 리턴
+									 return Optional.empty();
+									 }
+								
+								
+								public static void main(String[] args) throws IllegalAccessException {
+									
+									//Optional : NullPointException 방지
+									// null 체크 : java 8이전에는 없다.
+									// NullPointException NPE
+								
+									List<String> list = Arrays.asList("Apple", "Banana", "Cherry");
+									
+									Optional<String> optionalValue = getValueAtIndex(list, 1);
+									
+									String defaultValue = getValueAtIndex(list, 10).orElse("기본값");
+									
+												
+							
+									
+									
+									
+									
+		// 입출력
+			// system.in : 1바이트만 읽고 ascii code형식의 값을 반환
+		  // InputStream : 바이트 단위의 데이터를 읽어 들일때 사용하는 내장 클래스					
+									public class test {
+										
+										public static void main(String[] args) throws IOException {
+											
+										
+											// 입출력
+										// system.in : 1바이트만 읽고 ascii code형식의 값을 반환
+											// InputStream : 바이트 단위의 데이터를 읽어 들일때 사용하는 내장 클래스
+											InputStream in = System.in;
+//											int a = in.read();
+//											System.out.println(a);
+											
+											/*		// 사용자가 3바이트를 입력했을 때 3 바이트 모두 읽고 싶다.
+											int a;
+											int b;
+											int c;
+											a = in.read();
+											b = in.read();
+											c = in.read();
+										System.out.println(a);
+										System.out.println(b);
+										System.out.println(c); // abc입력하면 97 97 99 출력
+										
+										byte[] byteArr = new byte[3];
+										in.read(byteArr);
+										
+										System.out.println(byteArr[0]);
+										System.out.println(byteArr[1]);
+										System.out.println(byteArr[2]); // abc입력하면 97 97 99 출력*/
+										
+										//InputStreamReader
+										InputStreamReader reader = new InputStreamReader(in);
+//										char[] charArr = new char[3];
+//										reader.read(charArr);
+									//	
+//										System.out.println(charArr);//abc입력하면 abc 출력
+										
+										
+										BufferedReader br = new BufferedReader(reader);
+										String brString = br.readLine();
+										System.out.println(brString); // 문자열 막길게 써도 다 출력됨
+										
+								
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										// 파일 입출력
+										// 파일 쓰기
+										// input stream >> 읽기
+										// output stream >> 쓰기
+										// FileOutputStream : 지정한 경로에 파일을 생성한다.	
+											FileOutputStream output = new FileOutputStream("C:/java/out.txt");
+											
+											for (int i = 1; i < 11; i++) {
+												// \r\n 줄바꿈 문자
+												// 유닉스 계열에서는 \n만 있어도 된다.
+												// 윈도우는 \r\n으로 작성해야 개행된다.
+												String data = i + "번째 줄입니다.\r\n";
+												//OutputStream : InputStream 처럼 바이트 단위로 데이터를 처리하는 클래스다.
+												//FileOutputStream : OutputStream 클래스를 상속 받는다.
+												// 따라서 데이터를 바이트 단위로 처리한다.
+												output.write(data.getBytes());
+											}
+											
+											//사용한 파일 객체를 닫아주는 메서드
+											output.close(); // java폴더안에 out파일생김
+											
+											// FileWriter
+											// 파일을 쓸때 바이트 배열 대신 문자열을 사용 할 수 있다.
+											FileWriter fw = new FileWriter("C:/java/out2.txt");
+											for (int i = 1; i < 11; i++) {
+												String data = i + "번째 줄입니다.\r\n";
+												fw.write(data);
+											}
+											fw.close();
+											
+											// PrintWritter
+											// 개행문자를 안써도 된다.
+											PrintWriter pw = new PrintWriter("C:/java/out3.txt");
+											for (int i = 1; i < 11; i++) {
+												String data = i + "번째 줄입니다.";
+												pw.println(data);
+											}
+											pw.close();
+											
+											// 추가작성 - FileWriter
+											FileWriter fw2 = new FileWriter("C:/java/out3.txt", true);
+											for (int i = 11; i < 21; i++) {
+												String data = i + "번째 줄입니다.\r\n";
+												fw2.write(data);
+												
+											}
+											fw2.close();
+											// 추가작성 - PrintWriter
+											PrintWriter pw2 = new PrintWriter(new FileWriter("C:/java/out3.txt", true));
+											for (int i = 21; i < 31; i++) {
+												String data = i + "번째 줄입니다.\r\n";
+												pw2.write(data);
+												
+											}
+											pw2.close();
+											
+											
+										// FileInputStream
+										// 바이트배열 읽어야하는데 배열의 길이를 모를 경우 좀 불편, 
+										//따라서 예제에는 1024바이트만 읽게 하자	
+											
+											byte[] b = new byte[1024];
+											FileInputStream input = new FileInputStream("c:/java/out.txt");
+											input.read(b);
+											System.out.println(new String(b));
+											input.close();
+											
+											
+											// BufferdeReader
+											// 파일을 한줄단위로 읽는다.
+											// FileReader
+											BufferedReader br = new BufferedReader(new FileReader("c:/java/out.txt"));
+											while (true) {
+												String line = br.readLine();
+												if (line == null) break;
+												System.out.println(line);  
+//												                            1번째 줄입니다.
+//																			2번째 줄입니다.
+//																			3번째 줄입니다.
+//																			4번째 줄입니다.
+//																			5번째 줄입니다.
+//																			6번째 줄입니다.
+//																			7번째 줄입니다.
+//																			8번째 줄입니다.
+//																			9번째 줄입니다.
+//																			10번째 줄입니다.
+//												
+											}
+											
+											
+											
+											
+											
+	
+											
+	// Thread와 Runnable
+				
+		
+				package Baekjoon;
+
+				import java.util.ArrayList;
+				import java.util.List;
+
+				public class test extends Thread {
+					
+					private int seq;
+					
+					public test(int seq) {
+						this.seq = seq;
+					}
+
+					public void run() {
+						// Thread를 상속하면 run 메서드를 구현해야 한다.
+						System.out.println(this.seq +"thread run");
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println(this.seq +"thread end");
+					}
+					
+					public static void main(String[] args)  {
+						
+						// 동작하고 있는 프로그램을 프로세스 process
+						// 한개의 프로세스에는 한가지의 일을 수행한다
+						// 하지반 스레드 thread를 이용하면 프로세스 내에서
+						// 두가지 또는 그 이상의 일을 동시 수행할 수 있다.
+						List<Thread> threads = new ArrayList<>();
+							for (int i = 0; i <10; i++) {
+						test test = new test(i);
+						// start() 메서드로 thread를 실행한다.
+						test.start();
+						threads.add(test);
+							}
+							
+							for (int i = 0; i < threads.size(); i++) {
+								Thread t = threads.get(i);
+								try {
+									t.join();
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+														System.out.println("반복문 종료");
+//														4thread run
+//														6thread run
+//														1thread run
+//														3thread run
+//														7thread run
+//														8thread run
+//														5thread run
+//														2thread run
+//														9thread run
+//														0thread run
+//														8thread end
+//														0thread end
+//														1thread end
+//														5thread end
+//														2thread end
+//														7thread end
+//														3thread end
+//														9thread end
+//														4thread end
+//														6thread end
+//														반복문 종료
+
+															
+		//이걸 Runnable 로 (거의비슷)
+														
+								public class Sample implements Runnable {
+
+									private int seq;
+									public Sample(int seq) {
+										this.seq = seq;
+									}
+									@Override
+									public void run() {
+										System.out.println(this.seq +"thread run");
+										try {
+											Thread.sleep(1000);
+										} catch (InterruptedException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										System.out.println(this.seq +"thread end");
+									}
+										
+									
+									
+									public static void main(String[] args) {
+										
+
+										List<Thread> threads = new ArrayList<>();
+										for (int i = 0; i <10; i++) {
+									Thread test = new Thread(new Sample(i));
+									// start() 메서드로 thread를 실행한다.
+									test.start();
+									threads.add(test);
+										}
+										
+										for (int i = 0; i < threads.size(); i++) {
+											Thread t = threads.get(i);
+											try {
+												t.join();
+											} catch (InterruptedException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+										System.out.println("반복문 종료");												
+				
+				
+				
+										
+										
+										
+										
+			// 예제
+										
+				/* 1. 문자열바꾸기
+				다음과 같은 문자열이 있다
+				
+				문자열의 split과 String.join 메서드를 이용해서 다음과 같이 출력하자.
+				a#b#c#d
+				*/
+				/* 2. 맴에서 값 추출하기
+				 * 맵에서 'c'라는 key에 해당하는 value를 출력하는 프로그램이다.
+				 * 하지만 맵 a에는 'c'라는 key가 없어서 null이 출력된다.
+				 * 코드를 수정해서 'c'에 해당하는 key값이 없을 경우 null대신 70을 출력하자.
+				 */
+				
+
+				public static void main(String[] args)  {
+					
+					// 1번
+//											String s = "a:b:c:d";
+//										String[] ss = s.split(":");
+//										String result = String.join("#", ss);
+//											System.out.println(result);
+						//2번
+//											Map<String, Integer> a = new HashMap<>();
+//									        a.put("A", 90);
+//									        a.put("B", 80);
+//									        Integer c = a.get("C") == null ? 70 : a.get("C");
+//									        
+//									      
+//									        System.out.println(a.get("C"));
+
+						
+						// stream API를 사용해서 배열의 합과 평균을 구하는 코드로 개선하기
+						int[] nums = {1,2,3,4,5};
+						int sum = 0;
+						for (int i = 0; i <nums.length; i++) {
+							sum += nums[i];
+							
+						}
+						double avg = (double) sum / nums.length;
+						
+						int sum2 = Arrays.stream(nums).sum(); // 이 두줄만 추가함 됨.
+						double avg2 = Arrays.stream(nums).average().orElse(0.0);
+						
+						System.out.println(avg);//3.0
+						
+	
+						
+						
+						
+		// 15일차
+						
+						
+						public class SwingEx extends JFrame {
+							// 창을 만드는 객체, 파리미터를 지정하면 제목출력됨.
+							//JFrame frame = new JFrame("제목 출력");
+							// 버튼 객체
+							JButton btn1 = new JButton("확인");
+							JButton btn2 = new JButton("취소");
+							JButton btn3 = new JButton("1");
+							JButton btn4 = new JButton("2");
+							JButton btn5 = new JButton("3");
+							
+							JPanel jpanel = new JPanel();
+							
+							
+							
+							
+							public  SwingEx() {
+								// 제목 설정
+								super("제목이다.");
+								// 프레임 크기 지정
+								this.setSize(300, 400);
+								/*
+								 * GridLayout(세로 몇줄, 가로 몇줄)
+								 */
+								this.setLayout(new BorderLayout());
+							//	jpanel.add(btn1);
+							//	jpanel.add(btn2);
+								this.add(jpanel, "North");
+//								this.add(btn3, "west");
+//								this.add(btn4, "Center");
+								
+								
+								//텍스트 필드 생성 사용자가 값 입력할수있게
+								JTextField text = new JTextField("0");
+								// 사용자가 직접 입력하지 못하게 막는다.
+								text.setEditable(false);
+								//텍스트 우측 정렬
+								text.setHorizontalAlignment(JTextField.RIGHT);
+								//텍스트 필드를 상단에 배치한다.
+								this.add(BorderLayout.NORTH, text);
+								
+								// 컴포넌트를 담을 컨테이너 설정
+							//	Container container = this.getContentPane();
+//								container.add(btn1);
+//								container.add(btn2);
+//								container.add(btn3);
+//								container.add(btn4);
+//								container.add(btn5);
+//								container.add(btn1, BorderLayout.NORTH);
+//								container.add(btn2, BorderLayout.EAST);
+//								container.add(btn3, BorderLayout.WEST);
+//								container.add(btn4, BorderLayout.SOUTH);
+//								container.add(btn5, BorderLayout.CENTER);
+								
+								/* 레이아웃 설정
+								 * 1. FolwLayout : 컴포넌트를 좌에서 우로 배치 + 중앙정렬
+								 * 2. BorderLayout : 배치 위치를 정할 수 있다. 동서남북 + 중앙
+								 * 3. GridLayout : 테이블 형태의 레이아웃
+								 */
+								this.setLayout(new FlowLayout());
+								
+								// 버튼 추가
+//								this.add(btn1);
+//								this.add(btn2);
+								// 프레임 보이기
+								this.setVisible(true);
+								// 닫기 버튼 클릭시 처리
+								this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+								
+								
+								
+							}
+									
+							public static void main(String[] args) {
+								/*용어
+								 * 1. Container : 컴포넌트를 담는 역할
+								 * 2. Component : 버튼, 인풋박스, 텍스트 에어리어 등
+								 * 3. Layout : 컨테이너를 담는다. 화면에 자리 배치
+								 */
+								// 창 띄우기
+								
+								new SwingEx();
+								
+
+								
+								
+								
+			// 계산기 만들기
+								
+								// ActionListener은 사용자의 인터렉션 감지
+								public class Calc extends JFrame implements ActionListener {
+									private JPanel panel; // numberInput의 패널
+									private JPanel  panel2; // otherInput의 패널
+									private GridLayout gridLayout; // 계산기 버튼을 담을 레이아웃
+									private JButton btns;
+									private JTextField numberInput; // 숫자 입력
+									private JTextField otherInput; // 연산 기호 입력
+									
+									private String[] strGrid = {"7","8","9","/","4","5","6","*","1","2","3","-" ,"0","C","+","="};
+
+									
+									// 숫자누적배열
+									ArrayList<Integer> 숫자배열 = new ArrayList<>();
+									//연산자 누적 배열
+									ArrayList<String> 연산자배열 = new ArrayList<>();
+									// 숫자 누적 값
+									private String num1 = "";// 첫 번째 숫자
+									// 결과값
+									private String num2 = "";// 두 번째 숫자
+									
+								    private String operator = ""; // 연산자
+								    
+									public Calc() {
+										// 제목 설정
+										super("계산기");
+										// 프레임 크기 지정
+										this.setSize(800,700);
+										// 버튼을 담기 위한 객체
+										
+										
+								    
+										this.panel = new JPanel();
+										
+										this.panel2 = new JPanel();
+										
+										
+										
+										
+										this.numberInput = new JTextField("0");
+										
+										// 숫자 입력 칸 (결과 출력 칸) 크기 및 글자 크기 확대
+										this.numberInput.setFont(new Font("Arial", Font.BOLD, 50)); // 글자 크기 키움
+										this.numberInput.setPreferredSize(new Dimension(800, 100)); // 높이 조정
+										this.otherInput = new JTextField("");
+										// 연산자 입력 칸 크기 및 글자 크기 확대
+										this.otherInput.setFont(new Font("Arial", Font.BOLD, 30)); // 글자 크기 키움
+										this.otherInput.setPreferredSize(new Dimension(800, 50)); // 높이 조정
+										//텍스트의 우측 정렬
+										this.numberInput.setHorizontalAlignment(JTextField.RIGHT);
+										this.otherInput.setHorizontalAlignment(JTextField.RIGHT);
+										// 입력 못하게 처리
+										this.numberInput.setEditable(false);
+										this.otherInput.setEditable(false);
+										
+										this.panel2.setLayout(new BorderLayout());
+										this.panel2.add(BorderLayout.NORTH, this.numberInput);
+										this.panel2.add(BorderLayout.CENTER, this.otherInput);
+										
+										
+										
+										// 배열을 순회하면서 버튼 삽입
+										for(int i=0; i<strGrid.length; i++){
+											this.btns = new JButton(strGrid[i]);
+											this.btns.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+											this.btns.setBackground(new Color(255, 192, 203));
+											// 버튼 누름을 감지한다. 누르면 antionPerformed 메서드가 실행된다.
+											this.btns.addActionListener(this);
+											this.panel.add(this.btns);
+										}
+										// 버튼을 담은 panel을 GridLayout에 담는다.
+										this.panel.setLayout(new GridLayout(4,3,6,6));
+										this.add(BorderLayout.CENTER,panel);
+										this.add(BorderLayout.NORTH,panel2);
+										this.setVisible(true);
+										this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+									}
+									public static void main(String[] args) {
+										new Calc();
+									}
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										String cmd = e.getActionCommand();
+										//숫자를 입력했는지 연산기호를 입력했는지 판단
+										// C버튼 (초기화) 눌렀을 때, = 버튼 눌렀을 때
+										
+										if (cmd.matches("[0-9]")) {  // 0~9 입력 처리
+								            if (operator.isEmpty()) {
+								                num1 += cmd;
+								                numberInput.setText(num1);
+								            } else {
+								                num2 += cmd;
+								                numberInput.setText(num2);
+								            }
+								        } 
+								        // 연산자 버튼 클릭 시
+										// num1에 값이 있어야 operater에 추가됨.
+								        else if (cmd.matches("[\\+\\-\\*/]")) {
+								            if (!num1.isEmpty()) {
+								                operator = cmd;
+								                otherInput.setText(operator);
+								            }
+								        } 
+								        // "=" 버튼 클릭 시 (계산 실행)
+								        else if (cmd.equals("=")) {
+								            if (!num1.isEmpty() && !num2.isEmpty() && !operator.isEmpty()) {
+								                double result = calcul(Double.parseDouble(num1), Double.parseDouble(num2), operator);
+								                numberInput.setText(String.valueOf(result));
+								                otherInput.setText("");
+								                
+								                // 계산 완료 후 초기화 (계속 연산 가능하도록 설정)
+								                num1 = String.valueOf(result);
+								                num2 = "";
+								                operator = "";
+								            }
+								        } 
+								        // "C" 버튼 클릭 시 (초기화)
+								        else if (cmd.equals("C")) {
+								            숫자배열.clear();
+								            연산자배열.clear();
+								            //연산변수초기화
+								            num1= "";
+								            num2 = "";
+								            //인풋박스 값 초기화
+								            this.numberInput.setText("0");
+								            this.otherInput.setText("");
+								        }
+								    }
+
+								    // 실제 연산을 수행하는 메서드
+								    private double calcul(double a, double b, String op) {
+								    	 return switch (op) {
+								            case "+" -> a + b;
+								            case "-" -> a - b;
+								            case "*" -> a * b;
+								            case "/" -> (b != 0) ? a / b : 0; // 0으로 나누는 경우 예외 처리
+								            default -> 0;
+								        };
+								    }
+
+										
+										
+									}
+
+		
+							}
+
+						}
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+							}
+									
+							
+							
+							
+						}		
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 
 
 
