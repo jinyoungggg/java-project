@@ -1914,6 +1914,20 @@ public class HelloWorld {
 
 // 다형성: 여러개상속
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 interface Predator {
@@ -2169,7 +2183,7 @@ class Cry{
 		
 		
 	}
- 
+ /*
 
 //일반 List와 ArrayList 차이
  
@@ -2192,7 +2206,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
- import java.util.ArrayList;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
  import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -2616,7 +2632,7 @@ import utill.DateTimeUtill;
 										// 1. 날짜 생성해서 createDate에 파라미터로 넣기
 												//2. 메시지를 띄운다. (1 : book 추가생성 ㅣ\list에 밀어넣어, 2. book 항목 삭제
 										
-								DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		/*						DateTimeFormatter dFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
 								String formatedDate = LocalDateTime.now().format(dFormatter);
@@ -2643,7 +2659,7 @@ import utill.DateTimeUtill;
 										list.add(new Book("책3", "11", 13000, formatedDate));
 										list.add(new Book("책4", "11", 13000, formatedDate));
 										
-										
+				*/						
 										
 									   // list.add(new Book("23", "33", 33));
 										//추가할건지 삭제할건지 메세지를 띄운다.
@@ -2701,7 +2717,7 @@ import utill.DateTimeUtill;
 										
 									}}
 										
-
+/*
 										
 //********연습문제개중요!!
 								
@@ -4828,6 +4844,7 @@ public class Main {
 
 				import java.util.ArrayList;
 				import java.util.List;
+import java.util.UUID;
 
 				public class test extends Thread {
 					
@@ -5244,30 +5261,488 @@ public class Main {
 						
 						
 						
+		//16일차
 						
 						
+				Git : 버전 관리 시스템(변경 이력을 관리해 주는 도구)
+				1. 변경기록관리 : 코드나 문서의 변경 사항 추적 + 문제가 생겼을 떄 이전 상태로 되돌린다. (롤백)
+				2. 협업 : 여러명이 동시에 작업할 때, 각자의 작업을 충돌 없이 관리 가능
+				3. 백업 : 원격저장소에 프로젝트를 저장하면 백업이 된다는 개념
+				
+				
+				기본개념
+				1. Repository : 저장소를 뜻하며 파일과 변경 이력을 저장하는 곳이다. 
+								개인 프로젝트는 로컬 저장소에, 협업 프로젝트는 원격저장소에 저장된다.
+				2. Commit : 코드나 파일의 변경 사항을 기록하는 작업, "스냅샷"의 개념.
+				3. Branch : 독립적인 작업 공간. 여러 브랜치를 만들어서 서로 다른 작업을 동시에 할 수 있다.
+				4. Merge : 서로 다른 브랜치의 작업을 합친다.
+				5. Clone : 원격 저장소를 내 컴퓨터로 복사한다.
+				6. Push : 로컬에 작업한 내용을 원격 저장소에 올린다.
+				7. Pull : 원격 저장소의 내용을 로컬 저장소로 가져온다.
+				
+				기본 명령어
+				1. git init : 새로운 git 저장소 초기화
+				2. git status : 현재상태 확인 (변경된 파일, 커밋 안된 파일이 있는지)
+				3. git add 파일명 : 변경된 파일을 스테이징 영역에 추가
+				4. git commit-m "메세지" : 커밋을 생성하고 메시지를 추가
+				5. git push : 변경사항을 원격 저장소에 업로드
+				6. git pull : 원격저장소의 변경 내용을 로컬 저장소로 가져온다.
+				7. git clone 경로(url) : 원격저장소를 로컬로 복
+						
+				HTTP : 통신 프로토콜
+				웹서버와 클라이언트간의 응답과 요청을 처리하는 방식에 대해 정의된 규칙.
+				
+				1. GET : 서버에 데이터를 요청할 때 쓴다. 
+				        -서버의 리소스를 가져올 때 쓴다.
+				        -URL + 파라미터 : 2048자로 제한되어 있다.
+				        
+				        ex : https://도메인.com >>> html 리턴 >>> 브라우저는 그린다.
+				        ex : https://도메인.com?id=abcd&pw=1234 >>> 로그인 시도	
+				 
+				2. POST : 서버에 데이터를 제출하거나 리소스를 생성할 때 쓴다.
+					   - 서버에 데이터 전송 용도
+					   - URL에 데이터가 포함되지 않고, 요청 본문에 데이터를 전송
+					   ex : http://도메인.com/login
+				
+				그외 : PUT, DELETE, PATCH, HEAD, OPTIONS
+						
+				
+				JSON : Javascript Objict Notation
+				데이터를 저장하고 전송하는데 사용되는 표준 데이터 형식
+				1. 데이터 구조
+					- 객체 Object : {} 중괄호로 감싸진 키
+					값의 쌍의 집합
+					-배열 Array : [] 대괄호로 감싸진 값의 순서 있는 목록
+					- 값 Value : 문자열, 숫자, 배열, bool, null 등이 들어간다.
+					
+					
+					
+					
+					
+				문법
+				1. 객체 : {"키": "값","키": "값","키": "값",}
+					-키는 항상 문자열이고 따옴표로 감싼다.
+					- 값은 문자열, 숫자, 배열, bool, null 등이 들어간다.
+					- 각 키-값 쌍은 쉼표로 구분
+					배열 : ["값1", "값2", "값3"]
+						[객체, 객체, 객체]
+						
+						
+						
+	//HttpURL	
+								
+								public static void main(String[] args) {
+							// 요청할 URL
+							String targetUrl = "https://jsonplaceholder.typicode.com/posts/";
+							
+							try {
+							// 1. URL 객체 생성
+							@SuppressWarnings("deprecation")
+							URL url = new URL(targetUrl);
+							
+							
+							// 2. HttpURLConnention 객체 생성 및 설정
+							HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+							conn.setRequestMethod("GET");
+							// 추가 옵션이 필요할 경우 아래와 같다.
+							conn.setRequestProperty("User-Agent","Mozilla/5.0");
+							
+							// 3. 응답 코드 확인
+							int responseCode = conn.getResponseCode();
+							System.out.println(responseCode);
+							/*
+							 * HTTP 응답 코드 목록 (3자리 숫자 구성)
+							 * 1xx, 2xx, 3xx, 4xx, 5xx
+							 * 1xx : 100, 101, 102 >>>> 처리중이니 응답을 기다려라
+							 * 2xx : 200, 201, 202, 204, 205, 206 >>>>200 요청이 성공적으로 처리 되었다.
+							 * 3xx : 300 ~ 308 >>>> 클라이언트가 요청한 리소스가 다른 위치로 이동됨을 나타낸다.
+							 * 4xx : 400 ~ 417 >>>> 
+							 * 401 Unauthorized : 인증이 필요한 페이지인데 인증을 안받았다.
+							 * 403 Forbidden : 리소스에 대한 권한 부족일 때
+							 * 404 Not Found : 요청한 리소스를 서버에서 찾을 수 없을 때
+							 * 405 Method Not Allowed : 메서드를 잘못 표기했을 때
+							 * 406 Not Acceptable : 클라이언트가 요청한 콘텐츠 유형을 서버가 제공할 수 없을 때 
+							 * 408 Request Timeout : 클라이언트가 요청 후 시간이 오래 걸렸을 때
+							 * 409 Conflict : 서버의 현재 상태와 충돌일 때 >> EX : 데이터베이스에 중복된 데이터를 삽입하려 할 때
+							 * 
+							 * 5xx ----> 서버 오류
+							 * 500 ~ 505
+							 * 500 Internal Server Error : 서버에 예기치 않은 오류가 발생했다.
+							 * 503 Service Unavailable : 서버가 죽었다.. 또는 서버가 안돌아간다.
+							 */
+							
+							
+							
+							// 4. 응답이 성공이면 데이터 읽기
+							// 아래 두가지 모두 작동하는 코드 암거나 써도됨
+							
+							//if (responseCode == 200) {}
+							if (responseCode == HttpURLConnection.HTTP_OK) {
+								BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+								String inputLine;
+								StringBuilder response = new StringBuilder();
+								
+								while ( (inputLine = in.readLine()) != null   ) {
+									response.append(inputLine);
+								}
+								in.close(); // 스트림 닫기. 무적건
+								
+								// 5. 응답 출력 
+								//System.out.println(response.toString());
+								
+						
+						
+						
+						
+						
+		//파일출력				
+		//inputstream
+		//inputstreamreader
+		//bufferedreader
+								
+								public static void main(String[] args) throws IOException {
+									// 바이트(byte)로 읽음
+									InputStream in = System.in; 
+									// 캐릭터(char)로읽음(내가쓴값그대로출력)
+									InputStreamReader reader = new InputStreamReader(in);
+									// String으로 읽음 길이값 상관없이 다 출력
+									BufferedReader br = new BufferedReader(reader); 
+									//입력값은 ASCII 코드 값 출력
+									String a = br.readLine();
+									
+//									char[] a = new char[3];
+//									reader.read(a);
+									System.out.println(a);
+									//byte[] a = new byte[3]; 
+									//in.read(a);
+//									System.out.println(a[0]);
+//									System.out.println(a[1]);
+//									System.out.println(a[2]);  // 123 찍으면 49, 50, 51 출력
+//									System.out.println((char)a[0]);
+//									System.out.println((char)a[1]);
+//									System.out.println((char)a[2]); // 내가쓴값 그대로나옴 >> inputstreamreader
+
+								}				
+						
+						
+						
+						
+		//inputstream, filewriter				
 							}
 									
 							
-							
+							public class StreamBasic {
+
+								public static void main(String[] args) throws IOException {
+									
+								try	(FileWriter output = new FileWriter("c:/java/out.txt")){
+									
+									String value = "Inputstream은 바이트단위로 데이터를 처리한다.";
+									for (int i = 1; i < value.length(); i++) {
+										
+										output.write(value.charAt(i)); // charat은 1바이튼데 한글은 2바이트여서 글자가 깨짐 
+																		//	파일을 UTF-8이나 FileWriter로 바꾸면해결
+									}
+									output.close();
+								}catch (Exception e) {
+									
+								}
+										
+										
+										
+
+								}
+
+							}
+
+		//pilewriter					
+							public class StreamBasic {
+
+								public static void main(String[] args) throws IOException {
+									
+								try	(PrintWriter writer = new PrintWriter("c:/java/out.txt")){
+									
+									String value = "Inputstream은 바이트단위로 데이터를 처리한다.";
+									for (int i = 1; i < value.length(); i++) {
+										String data = i + "번째 줄입니다.";
+										writer.write(data); // charat은 1바이튼데 한글은 2바이트여서 글자가 깨짐 
+																		//	파일을 UTF-8이나 FileWriter로 바꾸면해결
+									}
+									
+								}catch (IOException e) {
+									
+								}
+										
+										
+										//
+
+								}
+								
+					// 파일 읽기
+								public class StreamBasic {
+
+									public static void main(String[] args) throws IOException  {
+										
+										FileInputStream input = new FileInputStream("c:/java/out.txt");
+										byte[] b =new byte[1024];
+										input.read(b);
+										System.out.println(new String(b));
+										input.close();
+									}
+
+								}	
+								
+				// BufferedReader
+								public class StreamBasic {
+
+									public static void main(String[] args) throws IOException   {
+										
+									BufferedReader br = new BufferedReader(new FileReader("c:/java/out.txt"));
+									
+									while(true) {
+										String line = br.readLine();
+										if ( line == null) break;
+										System.out.println(line);
+										
+									}
+									br.close();
+									
+									
+														
+									/*포지션
+									 * 
+			//관련용어들				* PM : Project Manager >>> 전체 책임자
+									 * PL : Project Leader >>> PM 서포트, 프로젝트 리딩
+									 * AA : Application Architech >>> 아키텍설계, 프레임워크 설계, 문서화, 개발시간산정
+									 * TA : Technical Architech >>> WAS (Web application Server), DB, SW 설치
+									 * 네트워크 구축
+									 * DA : Data Architech >>> DB 전문, 설계
+									 * QA : Quality Assurance >>> 품질보증
+									 * EA(BA) : Enterprice Architech, Business Architech >>> 기술관점 x 비즈니스
+									 * 관점에서 프로세스 설계
+									 * SA : Solution Architech >>> 개발환경구축
+									 * 개발자 : 개발자, QA, DA, TA(좃소가면)
+									 * 
+									 * 
+									 * CDC: Change Data Capture
+									 * 마지막으로 변경된 데이터 즉 최신 데이터만 추출하는 기술
+									 * 
+									 * SSO : Sing Sign On
+									 * 소셜 로그인 같은.. 한번 인증하면 여러개의 사이트를 이용 가능
+									 * 
+									 * SLO : Sing Log On
+									 * 각각 로그인
+									 * 
+									 * SI : System Integration
+									 * 시스템 개발 하청받아 일하는 업종
+									 * 
+									 * Meta Data : 다른 데이터를 설명해주는 데이터
+									 * 
+									 * AS-IS/ TO-BE
+									 * AS-IS : 지금 상태의 코드(개선전)
+									 * TO-BE : 미래의 코드 (개선후)
+									 * 
+									 * API : Application Programming Interface
+									 * 운영체계, 다른 응용 프로그램에게 처리 요구를 할 수 있게
+									 * 컴퓨터에서 미리 정해진 메서드를 호출 하면 특정한 데이터를 전송하는데,
+									 * 이를 이용해서 다른 애플리케이션에서 데이터를 활용할 수 있다.
+									 * 
+									 * WAS : Web Application Server
+									 * 웹서버 스프링프레임워크, html,php  등등 작성한 코드를 서버에서 실행할 수 있게 해주는 것
+									 * 
+									 * jsp : Java 기반의 웹개발 언어 html + java 코드
+									 * 
+									 * VO : Value Object
+									 * DAO : Data Transfer Object (VO, DAO 똑같음)
+									 * 
+									 * Swagger : API를 문서화 해주는 도구
+									 * 
+									 * CDN : Content Delivery Network
+									 * 위치적 제한 없이 전 세계 사용자에게 빠르게 콘텐츠를 전송하는 기술
+									 * 
+									 * AWS : Amazon Web Service
+									 * 클라우드 컴퓨팅 서비스
+									 * 
+									 * CI/CD
+									 * CI : 지속적 통합
+									 * CD : 지속적 배포
+									 * 
+									 * FTP : File Transfer Protocal 파일 전송 프로토콜
+									 * 
+									 * 
+									 * 
+									 * 
+									 * SM : System M
+									 */		
+							}
+
 							
 						}		
 					
 					
+								/*
+								 * 파일을 저장했다.
+								 * 파일 : a.txt > 안녕하세요.
+								 * 파일 : a.txt > 잘가라.
+								 * 중복 안되게 할 조건 : 파일 이름이 중복되지 않게 처리
+								 * abcd.txt abcd.txt
+								 * c:/java/2025/03/28/abcd.txt
+								 */
+								// 1. 사용자가 파일을 업로드하는 행위를 했다.
+								// 2. 연월일 기준 폴더 생성
+								LocalDate currentDate = LocalDate.now();
+								DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy/MM/dd");
+								String formattedDate = currentDate.format(formatter);
+								System.out.println(formattedDate); //2025/03/28
+								// c:/
+								File dirs = new File("c:/java/" + formattedDate);
+								if (!dirs.exists()) {
+									// 폴더가 없으면 생성
+									if (dirs.mkdirs()) {
+										System.out.println("폴더 생성 완료");
+									}else {
+										System.out.println("폴더 생성 실패");
+										return;
+									}
+								}
+								// 2. 파일 생성 후 저장
+								UUID uuid = UUID.randomUUID();
+								System.out.println(uuid);
+								
+								String fileName = uuid + "txt";  //파일명중복방지용으로 랜덤파일명 돌리기.
+								File file = new File(dirs, fileName);
+								String content = "It is a good day to die";
+								
+								try(BufferedWriter write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))) {
+									write.write(content);
+									System.out.println("저장완료");
+									
+								
+								
+								}catch (Exception e) {
+									// TODO: handle exception
+								}
+
+							}
+							}	
+					
+					
+							/*
+							 * 소켓통신 :Socket Communication
+							 * 네트워크를 통해 데이터를 주고 받을 수 있게 해 주는 방법
+							 * 네트워크상에 n개의 컴퓨터간 연결을 설정하고 데이터를
+							 * 송수신 하는 추상화된 인터페이스
+							 * 
+							 * 소켓 : ex) 2대가 교신을 한다고 가정하면
+							 * 2대의 컴퓨터가 데이터를 주고 받기위한 논리적 연결점
+							 * 기본적으로 TCP/IP 프로토콜을 쓴다.
+							 * 
+							 * 서버, 클라이언트
+							 * 서버 : 소켓통신에서 클라이언트의  연결요청을 기다리고,
+							 * 수락한 후 클라이언트와 데이터를 주고 받는다.
+							 * 클라이언트 : 클라이언트는 서버와 연결을 기다리고,
+							 * 서버와 데이터를 주고 받는다.
+							 * 
+							 * 통신 흐름
+							 * 1. 서버 소켓 생성 : 서버는 특정 포트에서 클라이언트의 연결을 기다린다.
+							 * (포트 Port : 데이터를 특정 프로그램이나 서비스를 전달하는 문(door)과 같은 역할)
+							 * (아파치 > html 구동 80포트, 스프링 8080포트)
+							 * 포트 : IP 주소와 함께 사용됨. 0 ~65535
+							 * ex : 192.168.0.10:80
+							 * 
+							 * 2. 클라이언트 소켓 생성 : 클라이언트는 서버의 IP주소 + 포트번호를 사용해서 서버와 연결 시도
+							 * 
+							 * 3. 연결 수립 : 클라이언트가 서버에 연결하면, 서버는 클라이언트의 연결을 수락하고, 데이터 교신 가능
+							 * 
+							 * 4. 데이터 송수신 : 데이터를 주고 받으며 통신을 진행
+							 * 
+							 * 5. 연결 종료 : 종료
+							 * 
+							 * 
+							 */					
+					
+					
+					
+	sql
+	
+	/*
+	 * 
+	 * PK 기본키
+	 * 특별한 의미를 지닌 열, 키 
+	 * >>학번과 같은 느낌 가장 기본이 되는 중복x 특별 키
+	 * 아이디와 주민번호는 보조키(대체키)라 볼수 있음
+	 * 기콘키와 보조키를 아울러 후보키
+	 * FK 외래키
+	 * >>학과코드
+	 * 다른테이블을 참조하기위한 특정한 컬럼이름
+	 * 복합키
+	 * >>과목코드가 같은데 담당교수가 다를때
+	 * 
+	 * 
+	 * sqlplus sys/oracle as sysdba 
+	 * 
+	 * ALTER SESSION SET"_oracle_script"=true >>> 기본적인 c## 접두사 삭제
+	 * 
+	 * 사용자 계정 생정
+	 * create user scott identified by tiger
+	 * default tablespace users quota unlimited on users;
+	 * 
+	 * grant create session, create table to scott; // 관리자권한이 부여되었습니다.
+	 * 
+	 * conn scott/tiger // 연결
+	 * 
+	 * 
+	 * desc emp;
+	 * desc dept;
+	 * desc salgrade;
+	 * 
+	 * exit
+	 * 
+	 * 
+	 * */
 					
 					
 					
 					
+	SELECT * from emp;
+	--주석
+	--DEPT : 부서정보
+	--DEPTNO : 부서번호, 2자리 숫자
+	--DNAME: 부서이름, 14바이트의 가변형문자
+	--LOC : 부서가 위치한 지역
+	-- SALGRADE : 각 사원의 급여
+	--GRADE : 급여등급, 숫자
+	-- LOSAL : 급여의 최소 금액, 숫자
+	-- HISAL : 급여의 최대 금액, 숫자
+	: 부서정보
+
+	--EMP : 사원정보
+	--EMPNO : 사원번호, 4자리 숫자, 사원정보
+	-- EXAME :이름, 10바이트 크기의 가변형
+	--JOB : 직책, 9바이트 크기의 가변형 문자
+	-- MGR : 직속 상관의 사원 번호, 4자리 숫자
+	-- HIREDATE : 입사일, 날짜형식
+	-- SAL : 급여,소수 2자리 포함하는 7자리 숫자
+	-- COMM : 급여외 수당
+	-- DEPTNO : 사원이 속한 부서 번호, 2자리 숫자			
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+	
+	
+	
+	SELECT * from emp;
+
+	SELECT 
+	    EMPCO, -- 사원번호
+	    ENAME, -- 사원명
+	    JOB, -- 직책
+	    MGR, -- 직속상관 사원번호
+	    comm
+	FROM EMP;
+
+	SELECT  DISTINCT --distinct  중복제거
+	    deptno, ename 
+	    from emp;
+	    
 					
 					
 					
